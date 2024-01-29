@@ -1,0 +1,153 @@
+[gd_scene load_steps=16 format=3 uid="uid://cslm33eqp5yii"]
+
+[ext_resource type="PackedScene" uid="uid://bmujtqncri61e" path="res://space rifle test.blend" id="1_e0ulv"]
+[ext_resource type="Script" path="res://space rifle test.gd" id="2_isdnx"]
+[ext_resource type="Curve" uid="uid://c6wc24tjs0t73" path="res://recoilcurve.tres" id="3_bfdbj"]
+[ext_resource type="Material" uid="uid://18x4tndcng1h" path="res://muzzle flash.tres" id="4_2mdgb"]
+[ext_resource type="ArrayMesh" uid="uid://cqw55rdmup8qa" path="res://muzzle flash.obj" id="5_axjc6"]
+[ext_resource type="AudioStream" uid="uid://dmjmgmu0ck0q4" path="res://audio/m4shot.mp3" id="6_o54wb"]
+
+[sub_resource type="Gradient" id="Gradient_v8aeh"]
+offsets = PackedFloat32Array(0, 0.254545, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h45in"]
+gradient = SubResource("Gradient_v8aeh")
+
+[sub_resource type="Curve" id="Curve_17sgt"]
+_data = [Vector2(0, 0), 0.0, 2.65934, 0, 0, Vector2(1, 1), 0.262781, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e3x54"]
+curve = SubResource("Curve_17sgt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l5oro"]
+particle_flag_rotate_y = true
+angle_min = -720.0
+angle_max = 720.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.8
+scale_max = 1.2
+scale_curve = SubResource("CurveTexture_e3x54")
+color_ramp = SubResource("GradientTexture1D_h45in")
+
+[sub_resource type="Animation" id="Animation_xlo7h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_r5ubb"]
+resource_name = "Reload"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.5, 1, 2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.141, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.5, 1, 2),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(0, 2.39285, -0.42586), Vector3(0, 1.5708, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ucrh7"]
+_data = {
+"RESET": SubResource("Animation_xlo7h"),
+"Reload": SubResource("Animation_r5ubb")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ky0hg"]
+properties/0/path = NodePath("MuzzleFlash:emitting")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="space rifle test" instance=ExtResource("1_e0ulv")]
+transform = Transform3D(-3.61999e-06, 0, 1, 0, 1, 0, -1, 0, -3.61999e-06, 0, 0, 0)
+script = ExtResource("2_isdnx")
+recoil_rotation_x = ExtResource("3_bfdbj")
+recoil_rotation_y = ExtResource("3_bfdbj")
+recoil_position_z = ExtResource("3_bfdbj")
+recoil_amplitude = Vector3(0.2, 0, 3)
+lerp_speed = 1.0
+
+[node name="MuzzleFlash" type="GPUParticles3D" parent="." index="1"]
+transform = Transform3D(-2.2838e-08, -0.627528, -2.2838e-08, 0.522472, -2.74301e-08, 2.2838e-08, -2.2838e-08, -2.74301e-08, 0.522472, 2.39469, 0.402929, -0.0440292)
+material_override = ExtResource("4_2mdgb")
+gi_mode = 0
+emitting = false
+amount = 1
+lifetime = 0.08
+one_shot = true
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_l5oro")
+draw_pass_1 = ExtResource("5_axjc6")
+
+[node name="RayCast3D" type="RayCast3D" parent="." index="2"]
+transform = Transform3D(-1.45705e-07, 0, -3.33333, 0, 3.33333, 0, 3.33333, 0, -1.45705e-07, 2.54319, 0.408952, -0.0447004)
+target_position = Vector3(0, 0, -2000)
+collision_mask = 2
+
+[node name="AnimationRifle" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_ucrh7")
+}
+
+[node name="magCount" type="Label3D" parent="." index="4"]
+transform = Transform3D(-4.37115e-08, 0, -1, 0, 1, 0, 1, 0, -4.37115e-08, -0.378999, 0.307298, -0.261195)
+text = "20
+"
+
+[node name="ammoCount" type="Label3D" parent="." index="5"]
+transform = Transform3D(-4.37115e-08, 0, -1, 0, 1, 0, 1, 0, -4.37115e-08, -0.378999, 0.17189, -0.261195)
+text = "210
+"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="6"]
+replication_config = SubResource("SceneReplicationConfig_ky0hg")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0.4, -6.51598e-06)
+stream = ExtResource("6_o54wb")
+panning_strength = 0.2

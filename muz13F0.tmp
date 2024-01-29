@@ -1,0 +1,17 @@
+# Blender 3.6.0 MTL File: 'muzzle flash.blend'
+# www.blender.org
+
+newmtl Material.002
+Ks 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 1
+Pr 0.000000
+Pm 0.000000
+Ps 0.000000
+Pc 0.000000
+Pcr 0.000000
+aniso 0.000000
+anisor 0.000000
+map_Kd Untitled-1.png
+map_Ke Untitled-1.png
+map_d Untitled-1.png

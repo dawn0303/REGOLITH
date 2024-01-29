@@ -1,0 +1,275 @@
+[gd_scene load_steps=15 format=3 uid="uid://c81x73k1fht22"]
+
+[ext_resource type="PackedScene" uid="uid://bhud3gp8mqybo" path="res://lunar surface test.blend" id="1_16y0x"]
+[ext_resource type="Script" path="res://lunar_surface_test.gd" id="2_j7te8"]
+[ext_resource type="Texture2D" uid="uid://dcp1tgft7jbj" path="res://textures/Colormap_0.png" id="2_rs65d"]
+[ext_resource type="Texture2D" uid="uid://br1jew8yed8ts" path="res://addons/kenney_particle_pack/circle_05.png" id="4_i87dj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kksxh"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.682353, 0.682353, 0.682353, 1)
+sky_energy_multiplier = 0.0
+ground_bottom_color = Color(0.729412, 0.729412, 0.729412, 1)
+ground_horizon_color = Color(0.682353, 0.682353, 0.682353, 1)
+
+[sub_resource type="Sky" id="Sky_3f2qr"]
+sky_material = SubResource("ProceduralSkyMaterial_kksxh")
+
+[sub_resource type="Environment" id="Environment_1f7t2"]
+background_mode = 2
+sky = SubResource("Sky_3f2qr")
+sky_custom_fov = 90.0
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_en81b"]
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+roughness = 0.0
+emission_enabled = true
+emission_energy_multiplier = 16.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhdwy"]
+albedo_texture = ExtResource("2_rs65d")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hp80k"]
+size = Vector3(1, 666.229, 640.685)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kie4j"]
+bg_color = Color(0.8, 0.152941, 0.152941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7isv"]
+bg_color = Color(0.301961, 0.694118, 0.4, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vj2d"]
+bg_color = Color(0.780392, 0.780392, 0.780392, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nl1bw"]
+properties/0/path = NodePath(".:weapon1")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:weapon2")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:Team2count")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:Team1count")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="world" instance=ExtResource("1_16y0x")]
+script = ExtResource("2_j7te8")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="0"]
+environment = SubResource("Environment_1f7t2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="1"]
+transform = Transform3D(0.490904, -0.354355, 0.795893, 0, 0.913545, 0.406737, -0.871214, -0.199669, 0.448463, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_max_distance = 1000.0
+
+[node name="Cube" parent="." index="2"]
+transform = Transform3D(1.0073, 0, 0, 0, 21.8561, 0, 0, 0, 2.79532, 28.8088, 21.3501, 0.0106063)
+surface_material_override/0 = SubResource("StandardMaterial3D_en81b")
+
+[node name="terrainTest" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.93, 1.947, 195.123)
+surface_material_override/0 = SubResource("StandardMaterial3D_mhdwy")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="terrainTest/StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -313.091, 78.9546, 0)
+shape = SubResource("BoxShape3D_hp80k")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="terrainTest/StaticBody3D" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 314.295, 78.9546, 0)
+shape = SubResource("BoxShape3D_hp80k")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="terrainTest/StaticBody3D" index="3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.601921, 78.9546, 242.987)
+shape = SubResource("BoxShape3D_hp80k")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="terrainTest/StaticBody3D" index="4"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.601891, 78.9546, -313.693)
+shape = SubResource("BoxShape3D_hp80k")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="terrainTest/StaticBody3D" index="5"]
+transform = Transform3D(-4.37114e-08, 0, 1, 1, -4.37114e-08, 4.37114e-08, 4.37114e-08, 1, 1.91069e-15, 0.601891, 400.274, -27.3245)
+shape = SubResource("BoxShape3D_hp80k")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
+
+[node name="MainMenu" type="PanelContainer" parent="CanvasLayer" index="0"]
+anchors_preset = -1
+anchor_left = 0.367
+anchor_top = 0.352
+anchor_right = 0.633
+anchor_bottom = 0.793
+offset_left = 0.215973
+offset_top = -17.096
+offset_right = -0.216003
+offset_bottom = 0.135986
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu" index="0"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer" index="0"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" index="0"]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" index="1"]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" index="2"]
+layout_mode = 2
+text = "Join"
+
+[node name="AddressEntry" type="LineEdit" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" index="3"]
+layout_mode = 2
+placeholder_text = "Enter Address to join Here"
+alignment = 1
+
+[node name="weapon1" type="OptionButton" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" index="4"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "rifle"
+popup/item_0/id = 0
+popup/item_1/text = "rock"
+popup/item_1/id = 1
+
+[node name="weapon2" type="OptionButton" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" index="5"]
+layout_mode = 2
+item_count = 2
+selected = 1
+popup/item_0/text = "rifle"
+popup/item_0/id = 0
+popup/item_1/text = "rock"
+popup/item_1/id = 1
+
+[node name="HUD" type="Control" parent="CanvasLayer" index="1"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD" index="0"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.03, 0.03)
+pivot_offset = Vector2(576, 324)
+texture = ExtResource("4_i87dj")
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/HUD" index="1"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03
+anchor_top = 0.929
+anchor_right = 0.534
+anchor_bottom = 1.0
+offset_left = 0.439999
+offset_top = 0.00799561
+offset_right = -0.16803
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_kie4j")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b7isv")
+value = 100.0
+metadata/_edit_use_anchors_ = true
+
+[node name="BoostBar" type="ProgressBar" parent="CanvasLayer/HUD" index="2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.975
+anchor_top = 0.147
+anchor_right = 0.984
+anchor_bottom = 0.884
+offset_left = 9.79993
+offset_top = -0.255997
+offset_right = 477.432
+offset_bottom = -440.832
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.57079
+scale = Vector2(1, 0.280005)
+theme_override_styles/background = SubResource("StyleBoxFlat_kie4j")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b7isv")
+max_value = 1000.0
+value = 1000.0
+show_percentage = false
+
+[node name="SuitBar" type="ProgressBar" parent="CanvasLayer/HUD" index="3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.085
+anchor_top = 0.88
+anchor_right = 0.484
+anchor_bottom = 0.915
+offset_left = 0.0800018
+offset_top = -0.240051
+offset_right = 0.431946
+offset_bottom = 0.0799561
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_kie4j")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8vj2d")
+value = 100.0
+
+[node name="Patches" type="Label" parent="CanvasLayer/HUD" index="4"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.846
+anchor_top = 0.912
+anchor_right = 0.992
+anchor_bottom = 0.986
+offset_left = 0.407959
+offset_top = 0.0239868
+offset_right = 0.215942
+offset_bottom = 0.0719604
+grow_horizontal = 2
+grow_vertical = 2
+text = "repair patches: 3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." index="5"]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("..")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="6"]
+replication_config = SubResource("SceneReplicationConfig_nl1bw")
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

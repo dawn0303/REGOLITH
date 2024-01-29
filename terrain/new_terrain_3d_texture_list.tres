@@ -1,0 +1,19 @@
+[gd_resource type="Terrain3DTextureList" load_steps=5 format=3 uid="uid://ds2jhdu8lide3"]
+
+[ext_resource type="Texture2D" path="res://textures/textures/toke4-j9dfz.dds" id="1_1a57b"]
+[ext_resource type="Texture2D" path="res://textures/textures/t8410-g900q.dds" id="2_7tclh"]
+
+[sub_resource type="Terrain3DTexture" id="Terrain3DTexture_nqty3"]
+albedo_texture = ExtResource("1_1a57b")
+normal_texture = ExtResource("2_7tclh")
+uv_rotation = 0.18
+
+[sub_resource type="Terrain3DTexture" id="Terrain3DTexture_hirdn"]
+texture_id = 1
+albedo_color = Color(0.937255, 0.937255, 0.937255, 1)
+albedo_texture = ExtResource("1_1a57b")
+normal_texture = ExtResource("2_7tclh")
+uv_rotation = 0.2
+
+[resource]
+textures = Array[Terrain3DTexture]([SubResource("Terrain3DTexture_nqty3"), SubResource("Terrain3DTexture_hirdn")])
