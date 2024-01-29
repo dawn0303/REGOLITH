@@ -3,6 +3,7 @@ All Rights Reserved
 Copyright (c) 2024, dawn0303
 
 The assets and code are distributed under an All Rights Reserved license. You may not redistribute or re-use these without express permission from the author.
+Godot addons are distributed under their original licences
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
