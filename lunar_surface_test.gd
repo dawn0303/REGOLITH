@@ -56,7 +56,7 @@ func _on_host_button_pressed():
 	
 	add_player(multiplayer.get_unique_id())
 	
-	upnp_setup()
+	#upnp_setup()
 
 func _on_join_button_pressed():
 	main_menu.hide()
@@ -156,17 +156,17 @@ func spawn(Name, pos, rot, vel, player):
 
 
 
-
-func upnp_setup():
-	var upnp = UPNP.new()
-	
-	var discover_result = upnp.discover()
-	assert(discover_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP Discover Failed! error %s" % discover_result)
-	
-	assert(upnp.get_gateway() and upnp.get_gateway().is_valid_gateway(), "UPNP Invalid Gateway!")
-	
-	var map_result = upnp.add_port_mapping(PORT)
-	assert(map_result== UPNP.UPNP_RESULT_SUCCESS, "UPNP Port Mapping Failed! Erorr %s" % map_result)
-	
-	print("Success! Join Address: %s" % upnp.query_external_address())
+#
+#func upnp_setup():
+	#var upnp = UPNP.new()
+	#
+	#var discover_result = upnp.discover()
+	#assert(discover_result == UPNP.UPNP_RESULT_SUCCESS, "UPNP Discover Failed! error %s" % discover_result)
+	#
+	#assert(upnp.get_gateway() and upnp.get_gateway().is_valid_gateway(), "UPNP Invalid Gateway!")
+	#
+	#var map_result = upnp.add_port_mapping(PORT)
+	#assert(map_result== UPNP.UPNP_RESULT_SUCCESS, "UPNP Port Mapping Failed! Erorr %s" % map_result)
+	#
+	#print("Success! Join Address: %s" % upnp.query_external_address())
 
