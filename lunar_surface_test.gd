@@ -12,7 +12,6 @@ extends Node3D
 
 
 
-
 const Player = preload("res://player.tscn")
 const Rock = preload("res://rock.tscn")
 const Rifle = preload("res://space_rifle_test.tscn")
@@ -91,6 +90,9 @@ func add_player(peer_id):
 	set_multiplayer_authority(peer_id) 
 	player.weapon1 = weapon1
 	player.weapon2 = weapon2
+	player.control = true
+	player.animBody.hide()
+	
 	#if Team1count > Team2count:
 		#player.team = "Team2"
 		#Team2count += 1
@@ -107,7 +109,6 @@ func add_player(peer_id):
 		#player.team = "Team2"
 		#Team2count += 1
 		#print(str("Team2"))
-	player.equip_weapons()
 	#player.position.x = randf_range(-200.0, 200.0)
 	#player.position.z = randf_range(-200.0, 200.0)
 	randomize()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c81x73k1fht22"]
+[gd_scene load_steps=14 format=3 uid="uid://c81x73k1fht22"]
 
 [ext_resource type="PackedScene" uid="uid://bhud3gp8mqybo" path="res://lunar surface test.blend" id="1_16y0x"]
 [ext_resource type="Script" path="res://lunar_surface_test.gd" id="2_j7te8"]
@@ -44,20 +44,6 @@ bg_color = Color(0.301961, 0.694118, 0.4, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8vj2d"]
 bg_color = Color(0.780392, 0.780392, 0.780392, 1)
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_nl1bw"]
-properties/0/path = NodePath(".:weapon1")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath(".:weapon2")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-properties/2/path = NodePath(".:Team2count")
-properties/2/spawn = true
-properties/2/replication_mode = 1
-properties/3/path = NodePath(".:Team1count")
-properties/3/spawn = true
-properties/3/replication_mode = 1
 
 [node name="world" instance=ExtResource("1_16y0x")]
 script = ExtResource("2_j7te8")
@@ -266,9 +252,6 @@ vertical_alignment = 1
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." index="5"]
 _spawnable_scenes = PackedStringArray("res://player.tscn")
 spawn_path = NodePath("..")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="6"]
-replication_config = SubResource("SceneReplicationConfig_nl1bw")
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

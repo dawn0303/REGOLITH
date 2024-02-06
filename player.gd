@@ -91,9 +91,7 @@ func _ready():
 		team_2_indicator.show()
 		team_1_indicator.hide()
 	
-	#equip_weapons.rpc()
-	weapon1 = get_parent().weapon1
-	weapon2 = get_parent().weapon2
+	equip_weapons()
 	if not is_multiplayer_authority(): 
 		animBody.show()
 		if equipped == 1:
@@ -108,7 +106,6 @@ func _ready():
 	audioPlayer.playing = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
-	equip_weapons.rpc()
 	anim_player.play("spawn")
 	def_weapon_parent_pos = weapon_parent.position
 
@@ -121,14 +118,13 @@ func _unhandled_input(event):
 			cam_parent.rotate_x(-event.relative.y * .005)
 			cam_parent.rotation.x = clamp(cam_parent.rotation.x, (-PI/2 +0.42), (PI/2 - 0.4))
 		if not control:
-			#rotate_y(-event.relative.x * .005)
-			#rotation.x = clamp(rotation.x, -PI/4, PI/4)
+			rotate_y(-event.relative.x * .005)
 			cam_parent.rotate_x(-event.relative.y * .005)
 			cam_parent.rotation.x = clamp(cam_parent.rotation.x, -PI/2, PI/4)
 
 
 func _physics_process(delta):
-	if not is_multiplayer_authority(): return
+	if not is_multiplayer_authority():return
 	if is_on_floor():
 		body_animate.rpc()
 	#if landing and velocity.x > 0:
@@ -146,7 +142,9 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	if not control: return
+	if not control: 
+		print("FAIL")
+		return
 	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -170,7 +168,7 @@ func _physics_process(delta):
 		velocity.z =  move_toward(velocity.z, (direction.z * 2 * SPEED) , THRUST/30)
 		boost -= 2
 		boost_changed.emit(boost)
-	elif is_on_floor():
+	elif not is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, 0.5)
 		velocity.z = move_toward(velocity.z, 0, 0.5)
 	if boost > 0 and Input.is_action_pressed("boost") and not is_on_floor():
@@ -181,8 +179,10 @@ func _physics_process(delta):
 		boost += 0.2
 		boost_changed.emit(boost)
 	#localVel3 =  Vector3(input_dir.x, 0, input_dir.y)
-	localVel3.x = move_toward(localVel3.x, input_dir.x, 0.2/SPEED)
-	localVel3.z = move_toward(localVel3.z, input_dir.y, 0.2/SPEED)
+	#localVel3.x = move_toward(localVel3.x, input_dir.x, 0.2/SPEED)
+	#localVel3.z = move_toward(localVel3.z, input_dir.y, 0.2/SPEED)
+	
+	move_and_slide()
 	
 	cam_tilt(input_dir.x, delta)
 	weapon_tilt(input_dir.x, delta)
@@ -206,7 +206,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("2")  and anim_player.current_animation != "shoot" and anim_player.current_animation != "reload" :
 		switch_weapon_2.rpc()
 		
-	move_and_slide()
+	
+	
 	
 	if suit < 100:
 		suitLeak()
