@@ -132,7 +132,7 @@ vertical_alignment = 1
 
 [node name="HostButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" index="1"]
 layout_mode = 2
-text = "Host"
+text = "Host (UNAVAILABLE)"
 
 [node name="JoinButton" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" index="2"]
 layout_mode = 2
@@ -270,6 +270,5 @@ spawn_path = NodePath("..")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="6"]
 replication_config = SubResource("SceneReplicationConfig_nl1bw")
 
-[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

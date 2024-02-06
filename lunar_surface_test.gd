@@ -19,44 +19,45 @@ const Rifle = preload("res://space_rifle_test.tscn")
 
 var weapon1
 var weapon2
-
-const PORT = 9999
-var enet_peer = ENetMultiplayerPeer.new()
+#
+#const PORT = 9999
+#var enet_peer = ENetMultiplayerPeer.new()
 var Team1count = 0
 var Team2count = 0
 
 func _ready():
 	randomize()
-	
+	#main_menu.hide()
+	#hud.show()
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 
 
-func _on_host_button_pressed():
-	main_menu.hide()
-	hud.show()
-	match weapon1_button.get_selected_id():
-		0:
-			weapon1 = Rifle
-		1:
-			weapon1 = Rock
-	match weapon2_button.get_selected_id():
-		0:
-			weapon2 = Rifle
-		1:
-			weapon2 = Rock
-	
-	
-	enet_peer.create_server(PORT)
-	multiplayer.multiplayer_peer = enet_peer
-	multiplayer.peer_connected.connect(add_player)
-	multiplayer.peer_disconnected.connect(remove_player)
-	
-	add_player(multiplayer.get_unique_id())
-	
-	#upnp_setup()
+#func _on_host_button_pressed():
+	#main_menu.hide()
+	#hud.show()
+	#match weapon1_button.get_selected_id():
+		#0:
+			#weapon1 = Rifle
+		#1:
+			#weapon1 = Rock
+	#match weapon2_button.get_selected_id():
+		#0:
+			#weapon2 = Rifle
+		#1:
+			#weapon2 = Rock
+	#
+	#
+	#enet_peer.create_server(PORT)
+	#multiplayer.multiplayer_peer = enet_peer
+	#multiplayer.peer_connected.connect(add_player)
+	#multiplayer.peer_disconnected.connect(remove_player)
+	#
+	#add_player(multiplayer.get_unique_id())
+	#
+	##upnp_setup()
 
 func _on_join_button_pressed():
 	main_menu.hide()
@@ -73,14 +74,23 @@ func _on_join_button_pressed():
 		1:
 			weapon2 = Rock
 		
-	enet_peer.create_client(address_entry.text, PORT)
-	multiplayer.multiplayer_peer = enet_peer
+	##enet_peer.create_client(address_entry.text, PORT)
+	##multiplayer.multiplayer_peer = enet_peer
+	#
+	
+	Server.join_server()
 	
 
-
 func add_player(peer_id):
+	
 	var player = Player.instantiate()
-	player.name = str(peer_id) 
+	
+	add_child(player)
+	
+	player.name = str(peer_id)
+	set_multiplayer_authority(peer_id) 
+	player.weapon1 = weapon1
+	player.weapon2 = weapon2
 	#if Team1count > Team2count:
 		#player.team = "Team2"
 		#Team2count += 1
@@ -97,13 +107,12 @@ func add_player(peer_id):
 		#player.team = "Team2"
 		#Team2count += 1
 		#print(str("Team2"))
-	player.equip_weapons.rpc_id(player.get_multiplayer_authority())
+	player.equip_weapons()
 	#player.position.x = randf_range(-200.0, 200.0)
 	#player.position.z = randf_range(-200.0, 200.0)
 	randomize()
 	#player.weapon1 = weapon1
 	#player.weapon2 = weapon2
-	add_child(player)
 	
 	if player.is_multiplayer_authority():
 		player.health_changed.connect(update_health_bar)
@@ -137,6 +146,7 @@ func _on_multiplayer_spawner_spawned(node):
 		node.boost_changed.connect(update_boost)
 
 
+##Here
 @rpc("any_peer", "call_local", "reliable")
 func spawn(Name, pos, rot, vel, player):
 	var unit = load(Name).instantiate()
@@ -169,4 +179,3 @@ func spawn(Name, pos, rot, vel, player):
 	#assert(map_result== UPNP.UPNP_RESULT_SUCCESS, "UPNP Port Mapping Failed! Erorr %s" % map_result)
 	#
 	#print("Success! Join Address: %s" % upnp.query_external_address())
-

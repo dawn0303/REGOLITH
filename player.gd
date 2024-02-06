@@ -61,9 +61,6 @@ var boost = 1000
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-func _enter_tree():
-	set_multiplayer_authority(str(name).to_int())
-
 func _ready():
 	
 	randomize()
@@ -217,13 +214,12 @@ func _physics_process(delta):
 	#AnimTree.set("parameters/BlendSpace2D/blend_position", Vector2(velocity.z/SPEED, velocity.x/SPEED) )
 	
 
-
-
 @rpc("call_local")
 func play_heal_effects():
 	anim_player.stop()
 	anim_player.play("heal")
 
+##Here
 @rpc("call_local", "reliable")
 func body_animate():
 	#print(str(localVel3))
@@ -235,22 +231,21 @@ func body_animate():
 		#AnimTree.set("parameters/BlendSpace2D/blend_position", Vector2(0,0) )
 	#
 
-@rpc("call_local", "reliable")
 func equip_weapons():
 	if not is_multiplayer_authority(): return
+	var weapon1_inst = weapon1.instantiate()
+	holster1.add_child(weapon1_inst)
+	mag1 = weapon1_inst.magmax
+	ammo1 = weapon1_inst.poolmax
 	
-	holster1.add_child(weapon1.instantiate())
-	mag1 = holster1.get_child(1,true).magmax
-	ammo1 = holster1.get_child(1,true).poolmax
-	weapon_1.emit(weapon1)
-	
-	holster2.add_child(weapon2.instantiate())
-	mag2 = holster2.get_child(1,true).magmax
-	ammo2 = holster2.get_child(1,true).poolmax
-	weapon_2.emit(weapon2)
+	var weapon2_inst = weapon2.instantiate()
+	holster2.add_child(weapon2_inst)
+	mag2 = weapon2_inst.magmax
+	ammo2 = weapon2_inst.poolmax
 	
 	equipped = 0
 
+##Here
 @rpc("call_local", "reliable")
 func switch_weapon_1():
 	if not is_multiplayer_authority(): return
@@ -266,6 +261,7 @@ func switch_weapon_1():
 	weapon_parent.get_child(1,false).equipped = true
 	equipped = 1
 
+##Here
 @rpc("call_local", "reliable")
 func switch_weapon_2():
 	if not is_multiplayer_authority(): return
@@ -282,6 +278,7 @@ func switch_weapon_2():
 	equipped = 2
 
 
+##Here
 @rpc("call_local", "any_peer")
 func recieve_damage(dmg):
 	if not control: return
@@ -306,6 +303,7 @@ func recieve_damage(dmg):
 	suit_changed.emit(suit)
 	patches_changed.emit(patches)
 
+##Here
 @rpc("call_local", "any_peer")
 func recieve_suit_damage(dmg):
 	if not control: return
@@ -330,6 +328,7 @@ func _on_animation_player_animation_finished(anim_name):
 		#anim_player.play("idle")
 		switch_weapon_1.rpc()
 
+##Here
 @rpc("call_local", "reliable")
 func spawn():
 		landing = true
