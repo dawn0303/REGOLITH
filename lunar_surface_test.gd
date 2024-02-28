@@ -9,6 +9,7 @@ extends Node3D
 @onready var patches = $CanvasLayer/HUD/Patches
 @onready var weapon1_button = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/weapon1
 @onready var weapon2_button = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/weapon2
+@onready var gear_button = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/gear
 
 
 
@@ -16,9 +17,11 @@ extends Node3D
 const Player = preload("res://player.tscn")
 const Rock = preload("res://rock.tscn")
 const Rifle = preload("res://space_rifle_test.tscn")
+const Shield = preload("res://shield.tscn")
 
 var weapon1
 var weapon2
+var gear
 
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
@@ -47,6 +50,9 @@ func _on_host_button_pressed():
 			weapon2 = Rifle
 		1:
 			weapon2 = Rock
+	match gear_button.get_selected_id():
+		0:
+			gear = Shield
 	
 	
 	enet_peer.create_server(PORT)
@@ -72,6 +78,9 @@ func _on_join_button_pressed():
 			weapon2 = Rifle
 		1:
 			weapon2 = Rock
+	match gear_button.get_selected_id():
+		0:
+			gear = Shield
 		
 	enet_peer.create_client(address_entry.text, PORT)
 	multiplayer.multiplayer_peer = enet_peer

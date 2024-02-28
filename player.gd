@@ -6,12 +6,14 @@ signal patches_changed(patches_value)
 signal boost_changed(boost_value)
 signal weapon_1(weapon_1_scene)
 signal weapon_2(weapon_2_scene)
+signal gear_1(gear_scene)
 
 @onready var camera = $CameraParent/Camera3D
 @onready var anim_player = $AnimationPlayer
 @onready var weapon_parent = $"CameraParent/Camera3D/weapon parent"
 @onready var holster1 = $MeshInstance3D/MeshInstance3D2/holster1
 @onready var holster2 = $MeshInstance3D/MeshInstance3D2/holster2
+@onready var holstergear = $MeshInstance3D/MeshInstance3D2/holstergear
 @onready var aim_point = $CameraParent/Camera3D/aimPoint
 @onready var raycast = $CameraParent/Camera3D/RayCast3D
 @onready var cam_parent = $CameraParent
@@ -25,6 +27,8 @@ signal weapon_2(weapon_2_scene)
 
 const Rock = preload("res://rock.tscn")
 const Rifle = preload("res://space_rifle_test.tscn")
+const shield = preload("res://shield.tscn")
+
 var ammo1 = 0
 var ammo2 = 0
 var mag1 = 0
@@ -32,6 +36,7 @@ var mag2 = 0
 var throwables = 3
 var weapon1# = Rifle
 var weapon2# = Rock
+var gear
 var gadget
 var melee
 
@@ -97,6 +102,7 @@ func _ready():
 	#equip_weapons.rpc()
 	weapon1 = get_parent().weapon1
 	weapon2 = get_parent().weapon2
+	gear = get_parent().gear
 	if not is_multiplayer_authority(): 
 		animBody.show()
 		if equipped == 1:
@@ -208,6 +214,9 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("2")  and anim_player.current_animation != "shoot" and anim_player.current_animation != "reload" :
 		switch_weapon_2.rpc()
+
+	if Input.is_action_just_pressed("3")  and anim_player.current_animation != "shoot" and anim_player.current_animation != "reload" :
+		switch_gear.rpc()
 		
 	move_and_slide()
 	
@@ -249,6 +258,9 @@ func equip_weapons():
 	ammo2 = holster2.get_child(1,true).poolmax
 	weapon_2.emit(weapon2)
 	
+	holstergear.add_child(gear.instantiate())
+	gear_1.emit(gear)
+	
 	equipped = 0
 
 @rpc("call_local", "reliable")
@@ -256,10 +268,16 @@ func switch_weapon_1():
 	if not is_multiplayer_authority(): return
 	
 	if equipped == 1: return
-	if weapon_parent.get_child_count() == 2:
+	if holster2.get_child_count() == 1:
 		weapon_parent.get_child(1,true).free()
 		holster2.add_child(weapon2.instantiate(), true)
 		holster2.get_child(1,false).equipped = false
+	
+	if holstergear.get_child_count() == 1:
+		weapon_parent.get_child(1,true).free()
+		holstergear.add_child(gear.instantiate(), true)
+		holstergear.get_child(1,false).equipped = false
+	
 	if holster1.get_child_count() == 2:
 		holster1.get_child(1,true).free()
 	weapon_parent.add_child(weapon1.instantiate(), true)
@@ -271,7 +289,7 @@ func switch_weapon_2():
 	if not is_multiplayer_authority(): return
 	
 	if equipped == 2: return
-	if weapon_parent.get_child_count() == 2:
+	if holster1.get_child_count() == 1:
 		weapon_parent.get_child(1,true).free()
 		holster1.add_child(weapon1.instantiate(), true)
 		holster1.get_child(1,false).equipped = false
@@ -281,7 +299,25 @@ func switch_weapon_2():
 	weapon_parent.get_child(1,false).equipped = true
 	equipped = 2
 
-
+@rpc("call_local", "reliable")
+func switch_gear():
+	if not is_multiplayer_authority(): return
+	
+	if equipped == 3: return
+	if holster2.get_child_count() == 1:
+		weapon_parent.get_child(1,true).free()
+		holster2.add_child(weapon2.instantiate(), true)
+		holster2.get_child(1,false).equipped = false
+	if holster1.get_child_count() == 1:
+		weapon_parent.get_child(1,true).free()
+		holster1.add_child(weapon1.instantiate(), true)
+		holster1.get_child(1,false).equipped = false
+	if holstergear.get_child_count() == 2:
+		holstergear.get_child(1,true).free()
+	weapon_parent.add_child(gear.instantiate(), true)
+	weapon_parent.get_child(1,false).equipped = true
+	equipped = 3
+	
 @rpc("call_local", "any_peer")
 func recieve_damage(dmg):
 	if not control: return

@@ -58,6 +58,9 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:Team1count")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath("world:gear")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="world" instance=ExtResource("1_16y0x")]
 script = ExtResource("2_j7te8")
@@ -160,6 +163,13 @@ popup/item_0/text = "rifle"
 popup/item_0/id = 0
 popup/item_1/text = "rock"
 popup/item_1/id = 1
+
+[node name="gear" type="OptionButton" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer" index="6"]
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "shield"
+popup/item_0/id = 0
 
 [node name="HUD" type="Control" parent="CanvasLayer" index="1"]
 visible = false
