@@ -46,6 +46,8 @@ shadow_mesh = SubResource("ArrayMesh_s1r2w")
 [sub_resource type="SphereShape3D" id="SphereShape3D_61jq6"]
 
 [node name="rock" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 31
 script = ExtResource("2_1jbmx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -57,6 +59,8 @@ mesh = SubResource("ArrayMesh_p4udl")
 skeleton = NodePath("")
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 17
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]

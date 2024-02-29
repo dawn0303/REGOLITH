@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://nybr24d5wpc"]
+[gd_scene load_steps=8 format=3 uid="uid://nybr24d5wpc"]
 
 [ext_resource type="Texture2D" uid="uid://b2oegilkckmyd" path="res://shield_shield texture.png" id="1_1yq1l"]
 [ext_resource type="Script" path="res://shield.gd" id="1_kxi1v"]
@@ -43,16 +43,32 @@ shadow_mesh = SubResource("ArrayMesh_fmtia")
 [sub_resource type="BoxShape3D" id="BoxShape3D_l4iho"]
 size = Vector3(0.866974, 1.80804, 0.12265)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tvllf"]
+size = Vector3(0.858887, 1, 0.136047)
+
 [node name="shield" type="StaticBody3D"]
 transform = Transform3D(-4.3, 0, 3.75918e-07, 0, 4.3, 0, -3.75918e-07, 0, -4.3, -1.1, -6, 2)
-collision_layer = 2
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_kxi1v")
 
 [node name="Shield" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.30243, 0.490951)
+layers = 3
 mesh = SubResource("ArrayMesh_c8qu7")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0121613, 1.04373, 0.562241)
 shape = SubResource("BoxShape3D_l4iho")
+disabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 1.19209e-07, 1.26997, 0.600313)
+collision_layer = 4
+collision_mask = 19
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00415081, 0, -0.0427876)
+shape = SubResource("BoxShape3D_tvllf")
+disabled = true

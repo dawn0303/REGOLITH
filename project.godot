@@ -86,6 +86,14 @@ boost={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="players"
+3d_physics/layer_2="environment"
+3d_physics/layer_3="shields"
+3d_physics/layer_4="gear"
+3d_physics/layer_5="other player"
+
 [physics]
 
 3d/default_gravity=1.62

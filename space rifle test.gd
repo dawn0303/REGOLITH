@@ -91,7 +91,7 @@ func _physics_process(delta):
 		play_shoot_effects.rpc()
 		if raycast.is_colliding():
 			var hit_player = raycast.get_collider()
-			if hit_player.team != player.team:
+			if hit_player.is_in_group("Players") and hit_player.team != player.team:
 				hit_player.recieve_suit_damage.rpc_id(hit_player.get_multiplayer_authority(), suit_damage)
 				hit_player.recieve_damage.rpc_id(hit_player.get_multiplayer_authority(), damage)
 	elif shooting:

@@ -127,7 +127,7 @@ draw_pass_1 = ExtResource("5_axjc6")
 [node name="RayCast3D" type="RayCast3D" parent="." index="2"]
 transform = Transform3D(-1.45705e-07, 0, -3.33333, 0, 3.33333, 0, 3.33333, 0, -1.45705e-07, 2.54319, 0.408952, -0.0447004)
 target_position = Vector3(0, 0, -2000)
-collision_mask = 2
+collision_mask = 31
 
 [node name="AnimationRifle" type="AnimationPlayer" parent="." index="3"]
 libraries = {

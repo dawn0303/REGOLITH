@@ -20,6 +20,8 @@ signal gear_1(gear_scene)
 @onready var team_1_indicator = $Team1Ind
 @onready var team_2_indicator = $Team2Ind
 
+#@onready var otherColider = $Area3D/CollisionShape3D2
+
 @onready var AnimTree = $z2anim/AnimationTree
 @onready var animBody = $z2anim
 
@@ -105,6 +107,7 @@ func _ready():
 	gear = get_parent().gear
 	if not is_multiplayer_authority(): 
 		animBody.show()
+		#otherColider.disabled = false
 		if equipped == 1:
 			holster1.get_child(0,false).reparent(weapon_parent, false)
 			weapon_parent.get_child(0,false).equipped = true
@@ -114,6 +117,8 @@ func _ready():
 			weapon_parent.get_child(0,false).equipped = true
 			equipped = 2
 		return
+	
+
 	audioPlayer.playing = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	camera.current = true
@@ -128,7 +133,11 @@ func _unhandled_input(event):
 		if control:
 			rotate_y(-event.relative.x * .005)
 			cam_parent.rotate_x(-event.relative.y * .005)
-			cam_parent.rotation.x = clamp(cam_parent.rotation.x, (-PI/2 +0.42), (PI/2 - 0.4))
+			if gear == shield and equipped == 3:
+				cam_parent.rotation.x = clamp(cam_parent.rotation.x, (-PI/2 +1.35), (PI/2 - 0.4))
+			else:
+				cam_parent.rotation.x = clamp(cam_parent.rotation.x, (-PI/2 +0.42), (PI/2 - 0.4))
+			
 		if not control:
 			#rotate_y(-event.relative.x * .005)
 			#rotation.x = clamp(rotation.x, -PI/4, PI/4)
@@ -151,7 +160,10 @@ func _physics_process(delta):
 	aim_point.global_position.z = lerp(aim_point.global_position.z, raycast.get_collision_point().z, 15*delta )
 	#weapon_parent.rotation.y += PI/2
 	
-	weapon_parent.look_at(aim_point.global_position, Vector3(0, 1, 0))#Vector3(PI/2, 0, 0))
+	if gear == shield and equipped == 3:
+		weapon_sway(delta)
+	else:
+		weapon_parent.look_at(aim_point.global_position, Vector3(0, 1, 0))#Vector3(PI/2, 0, 0))
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -296,6 +308,13 @@ func switch_weapon_2():
 			weapon_parent.get_child(1,true).free()
 		holster1.add_child(weapon1.instantiate(), true)
 		holster1.get_child(1,false).equipped = false
+	
+	if holstergear.get_child_count() == 1:
+		if weapon_parent.get_child_count() == 2:
+			weapon_parent.get_child(1,true).free()
+		holstergear.add_child(gear.instantiate(), true)
+		holstergear.get_child(1,false).equipped = false
+	
 	if holster2.get_child_count() == 2:
 		holster2.get_child(1,true).free()
 	weapon_parent.add_child(weapon2.instantiate(), true)
@@ -393,8 +412,8 @@ func weapon_tilt(x, delta):
 
 func weapon_sway(delta):
 	mouse_input = lerp(mouse_input,Vector2.ZERO,10*delta)
-	weapon_parent.rotation.z = lerp(weapon_parent.rotation.z, mouse_input.y * sway_amount, 10*delta)
-	weapon_parent.rotation.y = lerp(weapon_parent.rotation.y, (mouse_input.x * sway_amount)+PI/2, 10*delta)
+	weapon_parent.rotation.z = lerp(weapon_parent.rotation.z, (mouse_input.y * sway_amount), 10*delta)
+	weapon_parent.rotation.y = lerp(weapon_parent.rotation.y, (mouse_input.x * sway_amount), 10*delta)
 
 func weapon_bob(vel : float, delta):
 	if vel > 0 and is_on_floor():
