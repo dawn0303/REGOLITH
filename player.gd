@@ -269,12 +269,14 @@ func switch_weapon_1():
 	
 	if equipped == 1: return
 	if holster2.get_child_count() == 1:
-		weapon_parent.get_child(1,true).free()
+		if weapon_parent.get_child(1,true):
+			weapon_parent.get_child(1,true).free()
 		holster2.add_child(weapon2.instantiate(), true)
 		holster2.get_child(1,false).equipped = false
 	
 	if holstergear.get_child_count() == 1:
-		weapon_parent.get_child(1,true).free()
+		if weapon_parent.get_child(1,true):
+			weapon_parent.get_child(1,true).free()
 		holstergear.add_child(gear.instantiate(), true)
 		holstergear.get_child(1,false).equipped = false
 	
@@ -290,7 +292,8 @@ func switch_weapon_2():
 	
 	if equipped == 2: return
 	if holster1.get_child_count() == 1:
-		weapon_parent.get_child(1,true).free()
+		if weapon_parent.get_child(1,true):
+			weapon_parent.get_child(1,true).free()
 		holster1.add_child(weapon1.instantiate(), true)
 		holster1.get_child(1,false).equipped = false
 	if holster2.get_child_count() == 2:
@@ -305,11 +308,13 @@ func switch_gear():
 	
 	if equipped == 3: return
 	if holster2.get_child_count() == 1:
-		weapon_parent.get_child(1,true).free()
+		if weapon_parent.get_child(1,true):
+			weapon_parent.get_child(1,true).free()
 		holster2.add_child(weapon2.instantiate(), true)
 		holster2.get_child(1,false).equipped = false
 	if holster1.get_child_count() == 1:
-		weapon_parent.get_child(1,true).free()
+		if weapon_parent.get_child(1,true):
+			weapon_parent.get_child(1,true).free()
 		holster1.add_child(weapon1.instantiate(), true)
 		holster1.get_child(1,false).equipped = false
 	if holstergear.get_child_count() == 2:
