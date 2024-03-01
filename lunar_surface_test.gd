@@ -39,7 +39,7 @@ func _unhandled_input(_event):
 
 func _on_host_button_pressed():
 	main_menu.hide()
-	hud.show()
+	#hud.show()
 	match weapon1_button.get_selected_id():
 		0:
 			weapon1 = Rifle
@@ -66,7 +66,7 @@ func _on_host_button_pressed():
 
 func _on_join_button_pressed():
 	main_menu.hide()
-	hud.show()
+	#hud.show()
 	
 	match weapon1_button.get_selected_id():
 		0:

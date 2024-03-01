@@ -27,6 +27,13 @@ signal gear_1(gear_scene)
 
 @onready var audioPlayer = $AudioStreamPlayer
 
+
+@onready var hud = $CanvasLayer/HUD
+@onready var health_bar = $CanvasLayer/HUD/HealthBar
+@onready var suit_bar = $CanvasLayer/HUD/SuitBar
+@onready var boost_bar = $CanvasLayer/HUD/BoostBar
+@onready var patchesHud = $CanvasLayer/HUD/Patches
+
 const Rock = preload("res://rock.tscn")
 const Rifle = preload("res://space_rifle_test.tscn")
 const shield = preload("res://shield.tscn")
@@ -106,6 +113,7 @@ func _ready():
 	weapon2 = get_parent().weapon2
 	gear = get_parent().gear
 	if not is_multiplayer_authority(): 
+		hud.hide()
 		animBody.show()
 		#otherColider.disabled = false
 		if equipped == 1:
@@ -176,8 +184,11 @@ func _physics_process(delta):
 		suit += 25
 		suit = clamp(suit, 0, 100)
 		patches -= 1
-		suit_changed.emit(suit)
-		patches_changed.emit(patches)
+		suit_bar.value = suit
+		patchesHud.text = "repair patches: " + str(patches)
+		
+		#suit_changed.emit(suit)
+		#patches_changed.emit(patches)
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -190,17 +201,21 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, (direction.x * 2 * SPEED) , THRUST/30)
 		velocity.z =  move_toward(velocity.z, (direction.z * 2 * SPEED) , THRUST/30)
 		boost -= 2
-		boost_changed.emit(boost)
+		
+		boost_bar.value = boost
+		#boost_changed.emit(boost)
 	elif is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, 0.5)
 		velocity.z = move_toward(velocity.z, 0, 0.5)
 	if boost > 0 and Input.is_action_pressed("boost") and not is_on_floor():
 		velocity.y += THRUST/60
 		boost -=1
-		boost_changed.emit(boost)
+		boost_bar.value = boost
+		#boost_changed.emit(boost)
 	if not Input.is_action_pressed("boost") and boost < 1000:
 		boost += 0.2
-		boost_changed.emit(boost)
+		boost_bar.value = boost
+		#boost_changed.emit(boost)
 	#localVel3 =  Vector3(input_dir.x, 0, input_dir.y)
 	localVel3.x = move_toward(localVel3.x, input_dir.x, 0.2/SPEED)
 	localVel3.z = move_toward(localVel3.z, input_dir.y, 0.2/SPEED)
@@ -362,19 +377,26 @@ func recieve_damage(dmg):
 			holster1.get_child(1,true).free()
 		equip_weapons.rpc()
 		anim_player.play("spawn")
-	health_changed.emit(health)
-	suit_changed.emit(suit)
-	patches_changed.emit(patches)
+	
+	health_bar.value = health
+	suit_bar.value = suit
+	patchesHud.text = "repair patches: " + str(patches)
+	
+	#health_changed.emit(health)
+	#suit_changed.emit(suit)
+	#patches_changed.emit(patches)
 
 @rpc("call_local", "any_peer")
 func recieve_suit_damage(dmg):
 	if not control: return
 	if suit > 0:
 		suit -= dmg
-		suit_changed.emit(suit)
+		suit_bar.value = suit
+		#suit_changed.emit(suit)
 	elif dmg > suit:
 		suit = 0
-		suit_changed.emit(suit)
+		suit_bar.value = suit
+		#suit_changed.emit(suit)
 
 func suitLeak():
 	timer += 1
