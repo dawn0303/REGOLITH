@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bisc20l3dtkaw"]
+
+[ext_resource type="Script" path="res://rock.gd" id="1_qa62n"]
+
+[node name="Rock" type="Node"]
+script = ExtResource("1_qa62n")
