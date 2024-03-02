@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://jmbybekwvead"]
+
+[ext_resource type="Script" path="res://NetworkingClient.gd" id="1_rlsr6"]
+[ext_resource type="PackedScene" uid="uid://rwv4dj3uo84d" path="res://maps/depot/depot_mini.tscn" id="2_uskch"]
+
+[node name="Networking" type="Node3D"]
+script = ExtResource("1_rlsr6")
+
+[node name="Lobby" type="CanvasLayer" parent="."]
+
+[node name="ConnectBtn" type="Button" parent="Lobby"]
+offset_left = 361.0
+offset_top = 108.0
+offset_right = 543.0
+offset_bottom = 185.0
+text = "Connect"
+
+[node name="DisconnectBtn" type="Button" parent="Lobby"]
+offset_left = 647.0
+offset_top = 123.0
+offset_right = 829.0
+offset_bottom = 200.0
+text = "Disconnect"
+
+[node name="MainMenu" type="PanelContainer" parent="Lobby"]
+anchors_preset = -1
+anchor_left = 0.367
+anchor_top = 0.352
+anchor_right = 0.633
+anchor_bottom = 0.793
+offset_left = 0.215973
+offset_top = -17.096
+offset_right = -0.216003
+offset_bottom = 0.135986
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Lobby/MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Lobby/MainMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Lobby/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="weapon1" type="OptionButton" parent="Lobby/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "rifle"
+popup/item_0/id = 0
+popup/item_1/text = "rock"
+popup/item_1/id = 1
+
+[node name="weapon2" type="OptionButton" parent="Lobby/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+item_count = 2
+selected = 1
+popup/item_0/text = "rifle"
+popup/item_0/id = 0
+popup/item_1/text = "rock"
+popup/item_1/id = 1
+
+[node name="gear" type="OptionButton" parent="Lobby/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+item_count = 1
+selected = 0
+popup/item_0/text = "shield"
+popup/item_0/id = 0
+
+[node name="Node3D" parent="." instance=ExtResource("2_uskch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3777, 0, 4.9424)
+
+[connection signal="pressed" from="Lobby/ConnectBtn" to="." method="_on_connect_btn_pressed"]
+[connection signal="pressed" from="Lobby/DisconnectBtn" to="." method="_on_disconnect_btn_pressed"]

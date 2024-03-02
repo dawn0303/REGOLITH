@@ -90,22 +90,7 @@ func _on_join_button_pressed():
 func add_player(peer_id):
 	var player = Player.instantiate()
 	player.name = str(peer_id) 
-	#if Team1count > Team2count:
-		#player.team = "Team2"
-		#Team2count += 1
-		#print(str("Team2"))
-	#elif Team2count > Team1count:
-		#player.team = "Team1"
-		#Team1count += 1
-		#print(str("Team1"))
-	#elif randf() < 0.5:
-		#player.team = "Team1"
-		#Team1count += 1
-		#print(str("Team1"))
-	#else:
-		#player.team = "Team2"
-		#Team2count += 1
-		#print(str("Team2"))
+
 	player.equip_weapons.rpc_id(player.get_multiplayer_authority())
 	#player.position.x = randf_range(-200.0, 200.0)
 	#player.position.z = randf_range(-200.0, 200.0)

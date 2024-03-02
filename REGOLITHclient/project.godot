@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="REGOLITH"
-run/main_scene="res://lunar_surface_test.tscn"
+run/main_scene="res://NetworkingClient.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

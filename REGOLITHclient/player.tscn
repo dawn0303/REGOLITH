@@ -5384,7 +5384,7 @@ mesh = SubResource("ArrayMesh_snh5x")
 skin = SubResource("Skin_416jw")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="z2anim/SK_astronaut_007/Skeleton3D"]
-transform = Transform3D(-0.605789, -0.2168, -0.765518, 0.725029, 0.245803, -0.643361, 0.327648, -0.944764, 0.00828146, 0.0146005, -0.0235966, -0.656718)
+transform = Transform3D(-0.605789, -0.2168, -0.765518, 0.725029, 0.245803, -0.643362, 0.327647, -0.944764, 0.00828157, 0.0146007, -0.0235968, -0.656718)
 bone_name = "Spine1"
 bone_idx = 3
 
