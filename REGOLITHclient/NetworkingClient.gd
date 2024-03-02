@@ -43,8 +43,8 @@ func sync_player_list(updated_connected_peer_ids):
 	connected_peer_ids = updated_connected_peer_ids
 	multiplayer_peer.get_unique_id()
 	update_connection_buttons()
-	for peer_id in connected_peer_ids:
-		add_player(peer_id)
+	#for peer_id in connected_peer_ids:
+	#	add_player(peer_id)
 	print("Currently connected Players: " + str(connected_peer_ids))
 
 
@@ -78,6 +78,7 @@ func _on_disconnect_btn_pressed():
 
 
 func _on_server_disconnected():
+	
 	multiplayer_peer.close()
 	update_connection_buttons()
 	print("Connection to server lost.")
@@ -108,3 +109,9 @@ func add_player(peer_id):
 	print("hi")
 	
 
+
+
+func remove_player(peer_id):
+	var player = get_node_or_null(str(peer_id))
+	if player:
+		player.queue_free()

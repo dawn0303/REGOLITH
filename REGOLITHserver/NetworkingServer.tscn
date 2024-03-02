@@ -4,3 +4,7 @@
 
 [node name="Networking" type="Node"]
 script = ExtResource("1_acvag")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("..")

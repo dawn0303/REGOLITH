@@ -3,6 +3,7 @@ extends Node
 
 func _ready():
 	name = str(get_multiplayer_authority())
+	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 
 
 @rpc("call_local")

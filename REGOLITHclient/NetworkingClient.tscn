@@ -1,7 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://jmbybekwvead"]
+[gd_scene load_steps=4 format=3 uid="uid://jmbybekwvead"]
 
 [ext_resource type="Script" path="res://NetworkingClient.gd" id="1_rlsr6"]
 [ext_resource type="PackedScene" uid="uid://rwv4dj3uo84d" path="res://maps/depot/depot_mini.tscn" id="2_uskch"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_b35ay"]
+properties/0/path = NodePath(".:weapon1")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:weapon2")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:Team2count")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:Team1count")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:gear")
+properties/4/spawn = true
+properties/4/replication_mode = 2
 
 [node name="Networking" type="Node3D"]
 script = ExtResource("1_rlsr6")
@@ -79,6 +96,13 @@ popup/item_0/id = 0
 
 [node name="Node3D" parent="." instance=ExtResource("2_uskch")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3777, 0, 4.9424)
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("..")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_b35ay")
 
 [connection signal="pressed" from="Lobby/ConnectBtn" to="." method="_on_connect_btn_pressed"]
 [connection signal="pressed" from="Lobby/DisconnectBtn" to="." method="_on_disconnect_btn_pressed"]
