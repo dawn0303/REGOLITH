@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuvblxv1s0suo"]
+
+[ext_resource type="Script" path="res://space_rifle_test.gd" id="1_p6snv"]
+
+[node name="SpaceRifleTest" type="Node"]
+script = ExtResource("1_p6snv")

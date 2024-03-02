@@ -17,3 +17,13 @@ script = ExtResource("1_u30kb")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_my2xn")
 script = ExtResource("2_s543o")
+
+[node name="CameraParent" type="Node" parent="."]
+
+[node name="Camera3D" type="Node" parent="CameraParent"]
+
+[node name="weapon parent" type="Node" parent="CameraParent/Camera3D"]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="CameraParent/Camera3D/weapon parent"]
+_spawnable_scenes = PackedStringArray("res://space_rifle_test.tscn")
+spawn_path = NodePath("..")
