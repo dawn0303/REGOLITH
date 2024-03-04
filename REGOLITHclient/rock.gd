@@ -55,7 +55,7 @@ func _physics_process(_delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-@rpc("call_local")
+@rpc('any_peer', "call_local")
 func throw():
 	if player.throwables == 0: return
 	if equipped:# and get_tree().root.get_child(0):
@@ -79,7 +79,7 @@ func throw():
 
 
 func _on_area_3d_area_entered(Area):
-	if timer == 0 and Area.get_parent().is_in_group("Players") and get_parent().get_name() != "weapon parent" and get_parent().get_name() != "holster1" and get_parent().get_name() != "holster2":
+	if linear_velocity.length() > 10 and timer == 0 and Area.get_parent().is_in_group("Players") and get_parent().get_name() != "weapon parent" and get_parent().get_name() != "holster1" and get_parent().get_name() != "holster2":
 		linear_velocity = Vector3.ZERO
 		print(str(Area.get_parent().name))
 		var hit_player = Area.get_parent()

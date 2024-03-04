@@ -115,3 +115,20 @@ func remove_player(peer_id):
 	var player = get_node_or_null(str(peer_id))
 	if player:
 		player.queue_free()
+
+
+
+@rpc("any_peer", "call_local", "reliable")
+func spawn(Name, pos, rot, vel, player):
+	var unit = load(Name).instantiate()
+	unit.position = pos
+	unit.rotation = rot
+	unit.linear_velocity = vel
+	unit.player = player
+	#unit.team = team
+	#print(str(unit.player))
+	#var world = get_tree().root.get_node("Networking")
+	
+	add_child(unit, true)
+	
+

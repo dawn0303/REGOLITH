@@ -1,7 +1,8 @@
 extends Node
 
+var player
 
-@rpc("call_local")
+@rpc('any_peer')
 func throw():
 	pass
 

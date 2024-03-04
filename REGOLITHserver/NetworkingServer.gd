@@ -71,9 +71,9 @@ func spawn(Name, pos, rot, vel, player):
 	unit.player = player
 	#unit.team = team
 	#print(str(unit.player))
-	var world = get_tree().root.get_node("world")
+	#var world = get_tree().root.get_node("Networking")
 	
-	world.add_child(unit, true)
+	add_child(unit, true)
 
 
 

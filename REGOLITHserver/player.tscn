@@ -32,20 +32,20 @@ spawn_path = NodePath("..")
 
 [node name="MeshInstance3D2" type="Node" parent="MeshInstance3D"]
 
-[node name="holster2" type="Node" parent="MeshInstance3D/MeshInstance3D2"]
-
-[node name="MultiplayerSpawner3" type="MultiplayerSpawner" parent="MeshInstance3D/MeshInstance3D2/holster2"]
-_spawnable_scenes = PackedStringArray("res://space_rifle_test.tscn", "res://rock.tscn")
-spawn_path = NodePath("../../../../CameraParent/Camera3D/weapon parent")
-
 [node name="holster1" type="Node" parent="MeshInstance3D/MeshInstance3D2"]
 
 [node name="MultiplayerSpawner2" type="MultiplayerSpawner" parent="MeshInstance3D/MeshInstance3D2/holster1"]
 _spawnable_scenes = PackedStringArray("res://space_rifle_test.tscn", "res://rock.tscn")
 spawn_path = NodePath("../../../../CameraParent/Camera3D/weapon parent")
 
+[node name="holster2" type="Node" parent="MeshInstance3D/MeshInstance3D2"]
+
+[node name="MultiplayerSpawner3" type="MultiplayerSpawner" parent="MeshInstance3D/MeshInstance3D2/holster2"]
+_spawnable_scenes = PackedStringArray("res://space_rifle_test.tscn", "res://rock.tscn")
+spawn_path = NodePath("../../../../CameraParent/Camera3D/weapon parent")
+
 [node name="holstergear" type="Node" parent="MeshInstance3D/MeshInstance3D2"]
 
 [node name="MultiplayerSpawner4" type="MultiplayerSpawner" parent="MeshInstance3D/MeshInstance3D2/holstergear"]
-_spawnable_scenes = PackedStringArray("res://space_rifle_test.tscn", "res://rock.tscn")
+_spawnable_scenes = PackedStringArray("res://shield.tscn")
 spawn_path = NodePath("../../../../CameraParent/Camera3D/weapon parent")

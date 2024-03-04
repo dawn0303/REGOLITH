@@ -213,7 +213,7 @@ func _physics_process(delta):
 		boost_bar.value = boost
 		#boost_changed.emit(boost)
 	if not Input.is_action_pressed("boost") and boost < 1000:
-		boost += 0.2
+		boost += 0.3
 		boost_bar.value = boost
 		#boost_changed.emit(boost)
 	#localVel3 =  Vector3(input_dir.x, 0, input_dir.y)
