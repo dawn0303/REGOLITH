@@ -23,6 +23,9 @@ properties/4/replication_mode = 2
 [node name="Networking" type="Node3D"]
 script = ExtResource("1_rlsr6")
 
+[node name="Node3D" parent="." instance=ExtResource("2_uskch")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3777, 0, 4.9424)
+
 [node name="Lobby" type="CanvasLayer" parent="."]
 
 [node name="ConnectBtn" type="Button" parent="Lobby"]
@@ -89,16 +92,15 @@ popup/item_1/id = 1
 
 [node name="gear" type="OptionButton" parent="Lobby/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-item_count = 1
+item_count = 2
 selected = 0
 popup/item_0/text = "shield"
 popup/item_0/id = 0
-
-[node name="Node3D" parent="." instance=ExtResource("2_uskch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3777, 0, 4.9424)
+popup/item_1/text = "cover"
+popup/item_1/id = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://player.tscn")
+_spawnable_scenes = PackedStringArray("res://player.tscn", "res://cover.tscn", "res://rock.tscn")
 spawn_path = NodePath("..")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

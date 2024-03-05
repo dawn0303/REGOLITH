@@ -23,6 +23,7 @@ signal ammo_pool(patches_value)
 @onready var audioPlayer = $AudioStreamPlayer3D
 
 #var Impact
+var tag = "weapon"
 
 var target_rot : Vector3
 var target_pos : Vector3
@@ -140,5 +141,10 @@ func reload():
 	ammo_counter.text = str(player.ammo1)
 	shotCooldown = 0
 	
+
+func equip():
+	mag_counter.text = str(player.mag1)
+	ammo_counter.text = str(player.ammo1)
+	equipped = true
 
 

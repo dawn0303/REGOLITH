@@ -46,28 +46,30 @@ size = Vector3(0.866974, 1.65466, 0.12265)
 [sub_resource type="BoxShape3D" id="BoxShape3D_tvllf"]
 size = Vector3(0.858887, 1, 0.136047)
 
-[node name="shield" type="StaticBody3D"]
-transform = Transform3D(-4.3, 0, 3.75918e-07, 0, 4.3, 0, -3.75918e-07, 0, -4.3, -1.1, -6, 2)
+[node name="shield" type="RigidBody3D"]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -1.1, -6, 2)
 collision_layer = 4
 collision_mask = 7
+freeze = true
 script = ExtResource("1_kxi1v")
 
 [node name="Shield_001" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, -5.96046e-08, 1.48379, 0.490951)
+transform = Transform3D(4.3, 0, 5.68434e-14, 0, 4.3, 0, -5.68434e-14, 0, 4.3, 7.15256e-07, 6.36921, 2.56129)
 mesh = SubResource("ArrayMesh_y2vwm")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, 0.0121613, 1.10028, 0.562241)
+transform = Transform3D(4.3, 0, 5.68434e-14, 0, 4.3, 0, -5.68434e-14, 0, 4.3, 0.0121621, 5.9857, 2.63258)
 shape = SubResource("BoxShape3D_l4iho")
 disabled = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 1.19209e-07, 1.26997, 0.600313)
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 1.42109e-14, 0, 1, 0, -1.42109e-14, 0, 1, 8.34465e-07, 6.15539, 2.67065)
 collision_layer = 4
 collision_mask = 31
+freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00415081, 0, -0.0427876)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(4.3, 0, 0, 0, 4.3, 0, 0, 0, 4.3, 0.00415081, 0, -0.0427876)
 shape = SubResource("BoxShape3D_tvllf")
 disabled = true

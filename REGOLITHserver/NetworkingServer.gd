@@ -47,8 +47,8 @@ func _on_peer_disconnected(leaving_peer_id : int) -> void:
 
 func remove_player(leaving_peer_id : int) -> void:
 	var peer_idx_in_peer_list : int = connected_peer_ids.find(leaving_peer_id)
-	#if peer_idx_in_peer_list != -1:
-	#	connected_peer_ids.remove_at(peer_idx_in_peer_list)
+	if peer_idx_in_peer_list != -1:
+		connected_peer_ids.remove_at(peer_idx_in_peer_list)
 	var leavingPlayer = get_node_or_null(str(leaving_peer_id))
 	if leavingPlayer:
 		leavingPlayer.queue_free()

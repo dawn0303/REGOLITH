@@ -6,6 +6,8 @@ const Player = preload("res://player.tscn")
 const Rock = preload("res://rock.tscn")
 const Rifle = preload("res://space_rifle_test.tscn")
 const Shield = preload("res://shield.tscn")
+const Cover = preload("res://cover.tscn")
+
 
 @onready var connect_btn = $Lobby/ConnectBtn
 @onready var disconnect_btn = $Lobby/DisconnectBtn
@@ -64,6 +66,8 @@ func _on_connect_btn_pressed() -> void:
 	match gear_button.get_selected_id():
 		0:
 			gear = Shield
+		1:
+			gear = Cover
 	
 	multiplayer_peer.create_client(url, PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
@@ -123,7 +127,8 @@ func spawn(Name, pos, rot, vel, player):
 	var unit = load(Name).instantiate()
 	unit.position = pos
 	unit.rotation = rot
-	unit.linear_velocity = vel
+	if vel != Vector3.ZERO:
+		unit.linear_velocity = vel
 	unit.player = player
 	#unit.team = team
 	#print(str(unit.player))

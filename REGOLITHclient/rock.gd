@@ -7,6 +7,7 @@ extends RigidBody3D
 @onready var body = $Sphere
 
 @onready var player
+var tag = "weapon"
 
 const suit_damage = 5
 const damage = 20
@@ -63,18 +64,27 @@ func throw():
 		var pos = global_position
 		var rot = global_rotation
 		
+		var parent = get_parent()
+		
 		var a = player.get_transform().basis
 		var b = get_parent().get_parent().get_parent().get_transform().basis
 		var vel = (Vector3(a.x.z, b.y.z, -a.z.z) * 20)
 		
-		world.spawn.rpc("res://rock.tscn", pos, rot, vel, player)
-		player.throwables -= 1
+		var dup = duplicate()
 		
+		get_tree().root.get_child(0).add_child(dup)
+		dup.freeze = false
+		dup.sleeping = false
+		dup.global_position = pos
+		dup.linear_velocity = vel
+		player.throwables -= 1
 		if player.throwables == 0:
-			queue_free()
+			hide()
 
 
 
+func equip():
+	equipped = true
 
 
 

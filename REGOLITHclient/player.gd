@@ -34,14 +34,22 @@ signal gear_1(gear_scene)
 @onready var boost_bar = $CanvasLayer/HUD/BoostBar
 @onready var patchesHud = $CanvasLayer/HUD/Patches
 
+var weapon1inst
+var weapon2inst
+var gearinst
+
+
 const Rock = preload("res://rock.tscn")
 const Rifle = preload("res://space_rifle_test.tscn")
 const shield = preload("res://shield.tscn")
+const cover = preload("res://cover.tscn")
+
 
 var ammo1 = 0
 var ammo2 = 0
 var mag1 = 0
 var mag2 = 0
+var gearCount = 0
 var throwables = 3
 var weapon1# = Rifle
 var weapon2# = Rock
@@ -275,17 +283,22 @@ func body_animate():
 func equip_weapons():
 	if not is_multiplayer_authority(): return
 	
+	
 	holster1.add_child(weapon1.instantiate())
-	mag1 = holster1.get_child(1,true).magmax
-	ammo1 = holster1.get_child(1,true).poolmax
+	weapon1inst = holster1.get_child(1,true)
+	mag1 = weapon1inst.magmax
+	ammo1 = weapon1inst.poolmax
 	weapon_1.emit(weapon1)
 	
 	holster2.add_child(weapon2.instantiate())
-	mag2 = holster2.get_child(1,true).magmax
-	ammo2 = holster2.get_child(1,true).poolmax
+	weapon2inst = holster2.get_child(1,true)
+	mag2 = weapon2inst.magmax
+	ammo2 = weapon2inst.poolmax
 	weapon_2.emit(weapon2)
 	
 	holstergear.add_child(gear.instantiate())
+	gearinst = holstergear.get_child(1,true)
+	gearCount = gearinst.amount
 	gear_1.emit(gear)
 	
 	equipped = 0
@@ -293,68 +306,64 @@ func equip_weapons():
 @rpc("call_local", "reliable")
 func switch_weapon_1():
 	if not is_multiplayer_authority(): return
-	
-	if equipped == 1: return
-	if holster2.get_child_count() == 1:
-		if weapon_parent.get_child_count() == 2:
+	match equipped:
+		1:
+			return
+		2:
 			weapon_parent.get_child(1,true).free()
-		holster2.add_child(weapon2.instantiate(), true)
-		holster2.get_child(1,false).equipped = false
-	
-	if holstergear.get_child_count() == 1:
-		if weapon_parent.get_child_count() == 2:
+			holster2.add_child(weapon2.instantiate(), true)
+			holster2.get_child(1,false).equipped = false
+		3:
 			weapon_parent.get_child(1,true).free()
-		holstergear.add_child(gear.instantiate(), true)
-		holstergear.get_child(1,false).equipped = false
+			holstergear.add_child(gear.instantiate(), true)
+			holstergear.get_child(1,false).equipped = false
 	
-	if holster1.get_child_count() == 2:
-		holster1.get_child(1,true).free()
+	holster1.get_child(1,true).free()
 	weapon_parent.add_child(weapon1.instantiate(), true)
-	weapon_parent.get_child(1,false).equipped = true
+	weapon_parent.get_child(1,false).equip()
 	equipped = 1
+
 
 @rpc("call_local", "reliable")
 func switch_weapon_2():
 	if not is_multiplayer_authority(): return
 	
-	if equipped == 2: return
-	if holster1.get_child_count() == 1:
-		if weapon_parent.get_child_count() == 2:
+	match equipped:
+		1:
 			weapon_parent.get_child(1,true).free()
-		holster1.add_child(weapon1.instantiate(), true)
-		holster1.get_child(1,false).equipped = false
-	
-	if holstergear.get_child_count() == 1:
-		if weapon_parent.get_child_count() == 2:
+			holster1.add_child(weapon1.instantiate(), true)
+			holster1.get_child(1,false).equipped = false
+		2:
+			return
+		3:
 			weapon_parent.get_child(1,true).free()
-		holstergear.add_child(gear.instantiate(), true)
-		holstergear.get_child(1,false).equipped = false
+			holstergear.add_child(gear.instantiate(), true)
+			holstergear.get_child(1,false).equipped = false
 	
-	if holster2.get_child_count() == 2:
-		holster2.get_child(1,true).free()
+	holster2.get_child(1,true).free()
 	weapon_parent.add_child(weapon2.instantiate(), true)
-	weapon_parent.get_child(1,false).equipped = true
+	weapon_parent.get_child(1,false).equip()
 	equipped = 2
 
 @rpc("call_local", "reliable")
 func switch_gear():
 	if not is_multiplayer_authority(): return
 	
-	if equipped == 3: return
-	if holster2.get_child_count() == 1:
-		if weapon_parent.get_child_count() == 2:
+	match equipped:
+		1:
 			weapon_parent.get_child(1,true).free()
-		holster2.add_child(weapon2.instantiate(), true)
-		holster2.get_child(1,false).equipped = false
-	if holster1.get_child_count() == 1:
-		if weapon_parent.get_child_count() == 2:
+			holster1.add_child(weapon1.instantiate(), true)
+			holster1.get_child(1,false).equipped = false
+		2:
 			weapon_parent.get_child(1,true).free()
-		holster1.add_child(weapon1.instantiate(), true)
-		holster1.get_child(1,false).equipped = false
-	if holstergear.get_child_count() == 2:
-		holstergear.get_child(1,true).free()
+			holster2.add_child(weapon2.instantiate(), true)
+			holster2.get_child(1,false).equipped = false
+		3:
+			return
+	
+	holstergear.get_child(1,true).free()
 	weapon_parent.add_child(gear.instantiate(), true)
-	weapon_parent.get_child(1,false).equipped = true
+	weapon_parent.get_child(1,false).equip()
 	equipped = 3
 	
 @rpc("call_local", "any_peer")

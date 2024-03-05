@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://NetworkingServer.gd" id="1_acvag"]
 
-[node name="Networking" type="Node"]
+[node name="Networking" type="Node3D"]
 script = ExtResource("1_acvag")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://player.tscn")
+_spawnable_scenes = PackedStringArray("res://player.tscn", "res://cover.tscn", "res://rock.tscn")
 spawn_path = NodePath("..")
