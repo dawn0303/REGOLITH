@@ -275,7 +275,7 @@ size = Vector3(1.23975, 0.243164, 0.768555)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q0kxy"]
 transparency = 1
-albedo_color = Color(0.360784, 1, 0.396078, 1)
+albedo_color = Color(0.360784, 1, 0.396078, 0.666667)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_mlj2o"]
 resource_name = "cover_Plane"
