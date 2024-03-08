@@ -62,18 +62,18 @@ func sync_player_list(updated_connected_peer_ids):
 	
 
 
-@rpc("any_peer", "call_local", "reliable")
-func spawn(Name, pos, rot, vel, player):
-	var unit = load(Name).instantiate()
-	unit.position = pos
-	unit.rotation = rot
-	unit.linear_velocity = vel
-	unit.player = player
-	#unit.team = team
-	#print(str(unit.player))
-	#var world = get_tree().root.get_node("Networking")
-	
-	add_child(unit, true)
-
+#@rpc("any_peer", "call_local", "reliable")
+#func spawn(Name, pos, rot, vel, player):
+	#var unit = load(Name).instantiate()
+	#unit.position = pos
+	#unit.rotation = rot
+	#unit.linear_velocity = vel
+	#unit.player = player
+	##unit.team = team
+	##print(str(unit.player))
+	##var world = get_tree().root.get_node("Networking")
+	#
+	#add_child(unit, true)
+#
 
 

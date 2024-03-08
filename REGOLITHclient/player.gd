@@ -298,7 +298,8 @@ func equip_weapons():
 	
 	holstergear.add_child(gear.instantiate())
 	gearinst = holstergear.get_child(1,true)
-	gearCount = gearinst.amount
+	if gearinst.amount:
+		gearCount = gearinst.amount
 	gear_1.emit(gear)
 	
 	equipped = 0

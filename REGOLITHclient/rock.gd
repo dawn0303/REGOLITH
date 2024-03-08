@@ -60,11 +60,11 @@ func _physics_process(_delta):
 func throw():
 	if player.throwables == 0: return
 	if equipped:# and get_tree().root.get_child(0):
-		var world = get_tree().root.get_child(0)
+		#var world = get_tree().root.get_child(0)
 		var pos = global_position
-		var rot = global_rotation
+		#var rot = global_rotation
 		
-		var parent = get_parent()
+		#var parent = get_parent()
 		
 		var a = player.get_transform().basis
 		var b = get_parent().get_parent().get_parent().get_transform().basis

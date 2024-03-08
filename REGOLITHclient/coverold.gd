@@ -17,9 +17,7 @@ const cover = preload("res://cover.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if get_parent() == get_tree().root.get_child(0): 
-		show()
-		return
+	if get_parent() == get_tree().root.get_child(0): return
 	if player == null and get_parent() != get_tree().root.get_child(0):
 		player = $"../../../.."
 	if not player.is_multiplayer_authority(): return
@@ -34,7 +32,7 @@ func _unhandled_input(_event):
 		place.rpc()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
-func _process(_delta):
+func _process(delta):
 	if not equipped: return
 	if raycast.is_colliding() and !area.has_overlapping_bodies() and  player.gearCount > 0 :
 		ghost.show()
@@ -52,7 +50,7 @@ func _process(_delta):
 func place():
 	
 	ghost.hide()
-	#var parent = get_parent()
+	var parent = get_parent()
 	var dup = cover.instantiate()#duplicate()
 	var world = get_tree().root.get_child(0)
 	world.add_child(dup, true)
@@ -77,3 +75,9 @@ func equip():
 	equipped = true
 
 
+func _on_area_3d_area_entered(area):
+	valid = false
+
+
+func _on_area_3d_area_exited(area):
+	valid = true

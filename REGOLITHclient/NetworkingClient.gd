@@ -40,15 +40,6 @@ func _unhandled_input(_event):
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 
-@rpc
-func sync_player_list(updated_connected_peer_ids):
-	connected_peer_ids = updated_connected_peer_ids
-	multiplayer_peer.get_unique_id()
-	update_connection_buttons()
-	#for peer_id in connected_peer_ids:
-	#	add_player(peer_id)
-	print("Currently connected Players: " + str(connected_peer_ids))
-
 
 func _on_connect_btn_pressed() -> void:
 	print("Connecting ...")
@@ -121,19 +112,28 @@ func remove_player(peer_id):
 		player.queue_free()
 
 
+@rpc
+func sync_player_list(updated_connected_peer_ids):
+	connected_peer_ids = updated_connected_peer_ids
+	multiplayer_peer.get_unique_id()
+	update_connection_buttons()
+	#for peer_id in connected_peer_ids:
+	#	add_player(peer_id)
+	print("Currently connected Players: " + str(connected_peer_ids))
 
-@rpc("any_peer", "call_local", "reliable")
-func spawn(Name, pos, rot, vel, player):
-	var unit = load(Name).instantiate()
-	unit.position = pos
-	unit.rotation = rot
-	if vel != Vector3.ZERO:
-		unit.linear_velocity = vel
-	unit.player = player
-	#unit.team = team
-	#print(str(unit.player))
-	#var world = get_tree().root.get_node("Networking")
-	
-	add_child(unit, true)
-	
+
+#@rpc("any_peer", "call_local", "reliable")
+#func spawn(Name, pos, rot, vel, player):
+	#var unit = load(Name).instantiate()
+	#unit.position = pos
+	#unit.rotation = rot
+	#if vel != Vector3.ZERO:
+		#unit.linear_velocity = vel
+	#unit.player = player
+	##unit.team = team
+	##print(str(unit.player))
+	##var world = get_tree().root.get_node("Networking")
+	#
+	#add_child(unit, true)
+	#
 

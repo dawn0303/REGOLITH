@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://bb5wvamxw1hi1"]
 
+[ext_resource type="Script" path="res://coverold.gd" id="1_5dcrt"]
 [ext_resource type="Texture2D" uid="uid://b60wvdgcjj8v6" path="res://cover_cover.png" id="1_mgl07"]
-[ext_resource type="Script" path="res://cover.gd" id="1_t545q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yv4dx"]
 albedo_texture = ExtResource("1_mgl07")
@@ -308,7 +308,7 @@ properties/1/replication_mode = 1
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 12
 collision_mask = 29
-script = ExtResource("1_t545q")
+script = ExtResource("1_5dcrt")
 
 [node name="Cover" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.885938, 0, 0, 0, 1, -4.64736e-08, -0.00161339, 0.150202)
@@ -327,12 +327,12 @@ shape = SubResource("BoxShape3D_fmuhr")
 disabled = true
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.422622, 0, 0.906306, 0, 1, 0, -0.906306, 0, 0.422622, 0.631388, 0.53495, 0.0253669)
+transform = Transform3D(0.422618, 0, 0.906308, 0, 1, 0, -0.906308, 0, 0.422618, 0.631388, 0.53495, 0.0253669)
 shape = SubResource("BoxShape3D_nkj32")
 disabled = true
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.422622, 0, -0.906306, 0, 1, 0, 0.906306, 0, 0.422622, -0.62468, 0.53495, 0.038438)
+transform = Transform3D(0.422618, 0, -0.906308, 0, 1, 0, 0.906308, 0, 0.422618, -0.62468, 0.53495, 0.038438)
 shape = SubResource("BoxShape3D_qywj0")
 disabled = true
 

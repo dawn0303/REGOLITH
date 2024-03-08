@@ -5,7 +5,7 @@ extends RigidBody3D
 var equipped = false
 var team
 var player
-var amount = 1
+var amount = 10
 var tag = "gear"
 # Called when the node enters the scene tree for the first time.
 func _ready():
