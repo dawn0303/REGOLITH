@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://1rqv2vq4h1m7"]
 
 [ext_resource type="Script" path="res://shield.gd" id="1_wjcok"]
-[ext_resource type="Texture2D" uid="uid://b2oegilkckmyd" path="res://shield_shield texture.png" id="2_6hi0j"]
+[ext_resource type="Texture2D" uid="uid://cbob5l687mq4k" path="res://shield_shield texture.png" id="2_6hi0j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yibts"]
 resource_name = "Material"

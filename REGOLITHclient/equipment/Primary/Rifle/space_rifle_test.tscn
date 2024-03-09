@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=3 uid="uid://1xjnavo6hb0q"]
 
-[ext_resource type="PackedScene" uid="uid://bmujtqncri61e" path="res://space rifle test.blend" id="1_6asw0"]
+[ext_resource type="PackedScene" uid="uid://d0wmf526di0pi" path="res://space rifle test.blend" id="1_6asw0"]
 [ext_resource type="Script" path="res://space rifle test.gd" id="2_sepec"]
 [ext_resource type="Curve" uid="uid://c6wc24tjs0t73" path="res://recoilcurve.tres" id="3_uaej7"]
 [ext_resource type="Material" uid="uid://18x4tndcng1h" path="res://muzzle flash.tres" id="4_3c3hk"]
-[ext_resource type="ArrayMesh" uid="uid://cqw55rdmup8qa" path="res://muzzle flash.obj" id="5_vd5gk"]
+[ext_resource type="ArrayMesh" uid="uid://dqj6mmoeqp5ka" path="res://muzzle flash.obj" id="5_vd5gk"]
 [ext_resource type="AudioStream" uid="uid://dmjmgmu0ck0q4" path="res://audio/m4shot.mp3" id="6_dskwu"]
 
 [sub_resource type="Gradient" id="Gradient_v8aeh"]

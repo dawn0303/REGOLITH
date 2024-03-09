@@ -6,7 +6,8 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 var url : String = "your-prod.url"
 const PORT = 9009
 const Player = preload("res://player.tscn")
-const Cover = preload("res://cover.tscn")
+const Cover = preload("res://equipment/gear/Cover/cover.tscn")
+const rock = preload("res://equipment/secondary/Rock/rock.tscn")
 @onready var spawner = $MultiplayerSpawner
 
 var connected_peer_ids = []
