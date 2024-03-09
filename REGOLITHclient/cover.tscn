@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://5aayoik0ktuc"]
 
-[ext_resource type="Script" path="res://coverold.gd" id="1_k8ieu"]
-[ext_resource type="Texture2D" uid="uid://b60wvdgcjj8v6" path="res://cover_cover.png" id="1_mgl07"]
+[ext_resource type="Script" path="res://cover.gd" id="1_k8ieu"]
+[ext_resource type="Texture2D" uid="uid://ckkhngxdv2wfk" path="res://cover_cover.png" id="1_mgl07"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yv4dx"]
 albedo_texture = ExtResource("1_mgl07")

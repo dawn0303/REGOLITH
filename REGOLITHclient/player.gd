@@ -39,10 +39,10 @@ var weapon2inst
 var gearinst
 
 
-const Rock = preload("res://rock.tscn")
-const Rifle = preload("res://space_rifle_test.tscn")
-const shield = preload("res://shield.tscn")
-const cover = preload("res://cover.tscn")
+const Rock = preload("res://equipment/secondary/Rock/rock.tscn")
+const Rifle = preload("res://equipment/Primary/Rifle/space_rifle_test.tscn")
+const shield = preload("res://equipment/gear/Shield/shield.tscn")
+const cover = preload("res://equipment/gear/Cover/cover.tscn")
 
 
 var ammo1 = 0
@@ -435,8 +435,8 @@ func spawn():
 
 
 func cam_tilt(x, delta):
-	if cam_parent:
-		cam_parent.rotation.z = lerp(cam_parent.rotation.z, -x * tilt_amount, 1 * delta)
+	if camera:
+		camera.rotation.z = lerp(camera.rotation.z, -x * tilt_amount, 1 * delta)
 
 func weapon_tilt(x, delta):
 	if weapon_parent:

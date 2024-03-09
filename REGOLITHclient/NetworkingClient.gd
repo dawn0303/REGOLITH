@@ -3,10 +3,10 @@ extends Node3D
 const DEV = true
 
 const Player = preload("res://player.tscn")
-const Rock = preload("res://rock.tscn")
-const Rifle = preload("res://space_rifle_test.tscn")
-const Shield = preload("res://shield.tscn")
-const Cover = preload("res://cover.tscn")
+const Rock = preload("res://equipment/secondary/Rock/rock.tscn")
+const Rifle = preload("res://equipment/Primary/Rifle/space_rifle_test.tscn")
+const Shield = preload("res://equipment/gear/Shield/shield.tscn")
+const Cover = preload("res://equipment/gear/Cover/cover.tscn")
 
 
 @onready var connect_btn = $Lobby/ConnectBtn
@@ -50,8 +50,8 @@ func _on_connect_btn_pressed() -> void:
 		1:
 			weapon1 = Rock
 	match weapon2_button.get_selected_id():
-		0:
-			weapon2 = Rifle
+		#0:
+			#weapon2 = 
 		1:
 			weapon2 = Rock
 	match gear_button.get_selected_id():

@@ -6,7 +6,6 @@ var player
 var amount = 2
 var valid = true
 var tag = "gear"
-const cover = preload("res://cover.tscn")
 @onready var anim = $AnimationPlayer
 @onready var raycast = $RayCast3D
 @onready var col1 = $CollisionShape3D
@@ -17,7 +16,13 @@ const cover = preload("res://cover.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if get_parent() == get_tree().root.get_child(0): return
+	if get_parent() == get_tree().root.get_child(0):
+		equipped = false
+		col1.disabled = false
+		col2.disabled = false
+		col3.disabled = false
+		anim.play("KeyAction")
+		return
 	if player == null and get_parent() != get_tree().root.get_child(0):
 		player = $"../../../.."
 	if not player.is_multiplayer_authority(): return
@@ -46,29 +51,24 @@ func _process(delta):
 
 
 
+
 @rpc('any_peer', "call_local")
 func place():
 	
 	ghost.hide()
 	var parent = get_parent()
-	var dup = cover.instantiate()#duplicate()
 	var world = get_tree().root.get_child(0)
-	world.add_child(dup, true)
-	#world.add_child(dup)
-	dup.equipped = false
-	dup.global_position = raycast.get_collision_point()
-	dup.rotation = raycast.get_collision_normal()
-	dup.rotation.y = player.rotation.y + PI
-	dup.col1.disabled = false
-	dup.col2.disabled = false
-	dup.col3.disabled = false
-	dup.scale = Vector3(1.3, 1.3, 1.3)
-	dup.anim.play("KeyAction")
+	var pos = raycast.get_collision_point()
+	var rot =raycast.get_collision_normal()
+	var scl = Vector3(1.3, 1.3, 1.3)
+	rot.y = player.rotation.y + PI
+	
+	world.spawnTest.rpc("res://equipment/gear/Cover/cover.tscn", pos, rot, scl)
+	
 	player.gearCount -= 1
 	if player.gearCount == 0:
 		hide()
 		
-
 
 
 func equip():

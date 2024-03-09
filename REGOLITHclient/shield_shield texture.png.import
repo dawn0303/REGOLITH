@@ -2,13 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2oegilkckmyd"
+uid="uid://cbob5l687mq4k"
 path.s3tc="res://.godot/imported/shield_shield texture.png-9dbdea25ea3ad260cce93de5f976cbab.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 

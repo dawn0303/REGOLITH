@@ -2,13 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g5vhsrtotayg"
+uid="uid://d118do88rh5y5"
 path.s3tc="res://.godot/imported/muzzle flash_Untitled-1.png-65d14969f69668a062ac638d0b2d12a4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={}
 
 [deps]
 

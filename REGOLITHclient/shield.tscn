@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://nybr24d5wpc"]
 
-[ext_resource type="Texture2D" uid="uid://b2oegilkckmyd" path="res://shield_shield texture.png" id="1_1yq1l"]
+[ext_resource type="Texture2D" uid="uid://cbob5l687mq4k" path="res://shield_shield texture.png" id="1_1yq1l"]
 [ext_resource type="Script" path="res://shield.gd" id="1_kxi1v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yibts"]
