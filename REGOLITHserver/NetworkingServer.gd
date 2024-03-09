@@ -6,6 +6,8 @@ var multiplayer_peer = ENetMultiplayerPeer.new()
 var url : String = "your-prod.url"
 const PORT = 9009
 const Player = preload("res://player.tscn")
+const Cover = preload("res://cover.tscn")
+@onready var spawner = $MultiplayerSpawner
 
 var connected_peer_ids = []
 
@@ -77,3 +79,15 @@ func sync_player_list(updated_connected_peer_ids):
 #
 
 
+@rpc("any_peer", "call_local", "reliable")
+func spawnTest(name, pos, rot, scl):
+	var object = load(name).instantiate()
+	add_child(object, true)
+	object.global_position = pos
+	print(pos)
+	object.rotation = rot
+	print(rot)
+	object.scale = scl
+
+func _on_multiplayer_spawner_spawned(node):
+	print("spawned " + str(node))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxqsep636cxu5"]
+[gd_scene load_steps=8 format=3 uid="uid://cxqsep636cxu5"]
 
 [ext_resource type="Script" path="res://rock.gd" id="2_1jbmx"]
 
@@ -45,6 +45,17 @@ shadow_mesh = SubResource("ArrayMesh_s1r2w")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_61jq6"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mnvso"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:linear_velocity")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [node name="rock" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 31
@@ -66,5 +77,8 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(0.318184, 0, 0, 0, 0.318184, 0, 0, 0, 0.318184, 0, 0, 0)
 shape = SubResource("SphereShape3D_61jq6")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mnvso")
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]

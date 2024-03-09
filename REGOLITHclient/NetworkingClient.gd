@@ -15,6 +15,7 @@ const Cover = preload("res://cover.tscn")
 @onready var weapon1_button = $Lobby/MainMenu/MarginContainer/VBoxContainer/weapon1
 @onready var weapon2_button = $Lobby/MainMenu/MarginContainer/VBoxContainer/weapon2
 @onready var gear_button = $Lobby/MainMenu/MarginContainer/VBoxContainer/gear
+@onready var spawner = $MultiplayerSpawner
 
 var weapon1
 var weapon2
@@ -43,7 +44,6 @@ func _unhandled_input(_event):
 
 func _on_connect_btn_pressed() -> void:
 	print("Connecting ...")
-	
 	match weapon1_button.get_selected_id():
 		0:
 			weapon1 = Rifle
@@ -134,6 +134,18 @@ func sync_player_list(updated_connected_peer_ids):
 	##print(str(unit.player))
 	##var world = get_tree().root.get_node("Networking")
 	#
-	#add_child(unit, true)
+	#spawner.spawn(unit)
 	#
 
+@rpc("any_peer", "call_local", "reliable")
+func spawnTest(name, pos, rot, scl):
+	return
+	var object = load(name).instantiate()
+	object.global_position = pos
+	object.rotation = rot
+	add_child(object)
+
+
+
+func _on_multiplayer_spawner_spawned(node):
+	print("spawned " + str(node))

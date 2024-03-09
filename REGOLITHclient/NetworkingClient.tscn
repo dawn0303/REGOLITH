@@ -108,3 +108,4 @@ replication_config = SubResource("SceneReplicationConfig_b35ay")
 
 [connection signal="pressed" from="Lobby/ConnectBtn" to="." method="_on_connect_btn_pressed"]
 [connection signal="pressed" from="Lobby/DisconnectBtn" to="." method="_on_disconnect_btn_pressed"]
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

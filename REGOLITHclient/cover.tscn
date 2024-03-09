@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bb5wvamxw1hi1"]
+[gd_scene load_steps=15 format=3 uid="uid://5aayoik0ktuc"]
 
+[ext_resource type="Script" path="res://coverold.gd" id="1_k8ieu"]
 [ext_resource type="Texture2D" uid="uid://b60wvdgcjj8v6" path="res://cover_cover.png" id="1_mgl07"]
-[ext_resource type="Script" path="res://cover.gd" id="1_t545q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yv4dx"]
 albedo_texture = ExtResource("1_mgl07")
@@ -296,19 +296,22 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ri7pj"]
-properties/0/path = NodePath("..:visible")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6yc5j"]
+properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("..:position")
+properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath(".:scale")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="cover" type="StaticBody3D"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 12
 collision_mask = 29
-script = ExtResource("1_t545q")
+script = ExtResource("1_k8ieu")
 
 [node name="Cover" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.885938, 0, 0, 0, 1, -4.64736e-08, -0.00161339, 0.150202)
@@ -353,15 +356,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0163574, 0.378418, 0.11572
 shape = SubResource("BoxShape3D_s6fls")
 
 [node name="Ghost" type="MeshInstance3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 0.784886, 0, 0, 0, 1, -1.05608e-07, 0.0248303, 0.155579)
+transform = Transform3D(1.3, 0, 0, 0, 1.021, 0, 0, 0, 1.3, -1.05608e-07, 0.0248303, 0.155579)
 visible = false
 mesh = SubResource("ArrayMesh_mlj2o")
 skeleton = NodePath("")
 blend_shapes/expansion = 1.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-root_path = NodePath("../Area3D")
-replication_config = SubResource("SceneReplicationConfig_ri7pj")
+replication_config = SubResource("SceneReplicationConfig_6yc5j")
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

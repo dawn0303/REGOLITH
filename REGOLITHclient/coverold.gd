@@ -15,10 +15,17 @@ const cover = preload("res://cover.tscn")
 @onready var area = $Area3D
 @onready var ghost = $Area3D/Ghost
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if get_parent() == get_tree().root.get_child(0): return
-	if player == null and get_parent() != get_tree().root.get_child(0):
+	if get_parent() == get_tree().root.get_child(0):		
+		equipped = false
+		col1.disabled = false
+		col2.disabled = false
+		col3.disabled = false
+		anim.play("KeyAction")
+		return
+	if player == null:
 		player = $"../../../.."
 	if not player.is_multiplayer_authority(): return
 	if player.gearCount == 0:
@@ -51,19 +58,14 @@ func place():
 	
 	ghost.hide()
 	var parent = get_parent()
-	var dup = cover.instantiate()#duplicate()
 	var world = get_tree().root.get_child(0)
-	world.add_child(dup, true)
-	#world.add_child(dup)
-	dup.equipped = false
-	dup.global_position = raycast.get_collision_point()
-	dup.rotation = raycast.get_collision_normal()
-	dup.rotation.y = player.rotation.y + PI
-	dup.col1.disabled = false
-	dup.col2.disabled = false
-	dup.col3.disabled = false
-	dup.scale = Vector3(1.3, 1.3, 1.3)
-	dup.anim.play("KeyAction")
+	var pos = raycast.get_collision_point()
+	var rot =raycast.get_collision_normal()
+	var scl = Vector3(1.3, 1.3, 1.3)
+	rot.y = player.rotation.y + PI
+	
+	world.spawnTest.rpc("res://cover.tscn", pos, rot, scl)
+	
 	player.gearCount -= 1
 	if player.gearCount == 0:
 		hide()
@@ -75,9 +77,3 @@ func equip():
 	equipped = true
 
 
-func _on_area_3d_area_entered(area):
-	valid = false
-
-
-func _on_area_3d_area_exited(area):
-	valid = true

@@ -7,32 +7,43 @@ func _ready():
 
 
 @rpc("call_local")
-func play_heal_effects():pass
+func play_heal_effects():
+	return
 
-##Here
 @rpc("call_local", "reliable")
-func body_animate():pass
+func body_animate():
+	return
 
-@rpc
-func equip_weapons():pass
-
-##Here
 @rpc("call_local", "reliable")
-func switch_weapon_1():pass
+func equip_weapons():
+	return
 
-##Here
+
 @rpc("call_local", "reliable")
-func switch_weapon_2():pass
+func switch_weapon_1():
+	return
 
 
-##Here
+
+@rpc("call_local", "reliable")
+func switch_weapon_2():
+	return
+
+
+@rpc("call_local", "reliable")
+func switch_gear():
+	return
+
+	
 @rpc("call_local", "any_peer")
-func recieve_damage(dmg):pass
+func recieve_damage(dmg):
+	return
 
-##Here
+
 @rpc("call_local", "any_peer")
-func recieve_suit_damage(dmg):pass
+func recieve_suit_damage(dmg):
+	return
 
-##Here
 @rpc("call_local", "reliable")
-func spawn():pass
+func spawn():
+	return
