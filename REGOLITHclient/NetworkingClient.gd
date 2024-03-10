@@ -138,12 +138,8 @@ func sync_player_list(updated_connected_peer_ids):
 	#
 
 @rpc("any_peer", "call_local", "reliable")
-func spawnTest(name, pos, rot, scl):
+func spawnTest(_nme, _pos, _rot, _scl):
 	return
-	var object = load(name).instantiate()
-	object.global_position = pos
-	object.rotation = rot
-	add_child(object)
 
 
 

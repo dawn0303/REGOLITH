@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuvblxv1s0suo"]
+[gd_scene load_steps=3 format=3 uid="uid://cuvblxv1s0suo"]
 
-[ext_resource type="Script" path="res://space_rifle_test.gd" id="1_p6snv"]
+[ext_resource type="Script" path="res://equipment/Primary/Rifle/space_rifle_test.gd" id="1_hpiru"]
 
-[node name="SpaceRifleTest" type="Node"]
-script = ExtResource("1_p6snv")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wkhbk"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+
+[node name="SpaceRifleTest" type="Node3D"]
+script = ExtResource("1_hpiru")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wkhbk")

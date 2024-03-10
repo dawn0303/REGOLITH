@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://1xjnavo6hb0q"]
 
 [ext_resource type="PackedScene" uid="uid://d0wmf526di0pi" path="res://space rifle test.blend" id="1_6asw0"]
-[ext_resource type="Script" path="res://space rifle test.gd" id="2_sepec"]
+[ext_resource type="Script" path="res://equipment/Primary/Rifle/space rifle test.gd" id="2_rxlyy"]
 [ext_resource type="Curve" uid="uid://c6wc24tjs0t73" path="res://recoilcurve.tres" id="3_uaej7"]
 [ext_resource type="Material" uid="uid://18x4tndcng1h" path="res://muzzle flash.tres" id="4_3c3hk"]
 [ext_resource type="ArrayMesh" uid="uid://dqj6mmoeqp5ka" path="res://muzzle flash.obj" id="5_vd5gk"]
@@ -105,7 +105,7 @@ properties/2/replication_mode = 1
 
 [node name="space rifle test" instance=ExtResource("1_6asw0")]
 transform = Transform3D(-3.61999e-06, 0, 1, 0, 1, 0, -1, 0, -3.61999e-06, 0, 0, 0)
-script = ExtResource("2_sepec")
+script = ExtResource("2_rxlyy")
 recoil_rotation_x = ExtResource("3_uaej7")
 recoil_rotation_y = ExtResource("3_uaej7")
 recoil_position_z = ExtResource("3_uaej7")
@@ -127,7 +127,7 @@ draw_pass_1 = ExtResource("5_vd5gk")
 [node name="RayCast3D" type="RayCast3D" parent="." index="2"]
 transform = Transform3D(-1.45705e-07, 0, -3.33333, 0, 3.33333, 0, 3.33333, 0, -1.45705e-07, 2.54319, 0.408952, -0.0447004)
 target_position = Vector3(0, 0, -2000)
-collision_mask = 31
+collision_mask = 63
 
 [node name="AnimationRifle" type="AnimationPlayer" parent="." index="3"]
 libraries = {

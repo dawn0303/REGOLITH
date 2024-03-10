@@ -36,12 +36,12 @@ func switch_gear():
 
 	
 @rpc("call_local", "any_peer")
-func recieve_damage(dmg):
+func recieve_damage(_dmg):
 	return
 
 
 @rpc("call_local", "any_peer")
-func recieve_suit_damage(dmg):
+func recieve_suit_damage(_dmg):
 	return
 
 @rpc("call_local", "reliable")

@@ -93,6 +93,7 @@ boost={
 3d_physics/layer_3="shields"
 3d_physics/layer_4="gear"
 3d_physics/layer_5="other player"
+3d_physics/layer_6="ground"
 
 [physics]
 

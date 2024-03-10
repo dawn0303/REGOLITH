@@ -25,7 +25,7 @@ script = ExtResource("2_s543o")
 [node name="weapon parent" type="Node" parent="CameraParent/Camera3D"]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="CameraParent/Camera3D/weapon parent"]
-_spawnable_scenes = PackedStringArray("res://space_rifle_test.tscn", "res://equipment/secondary/Rock/rock.tscn", "res://equipment/Primary/Rifle/space_rifle_test.tscn", "res://equipment/gear/Shield/shield.tscn", "res://equipment/gear/Cover/cover.tscn")
+_spawnable_scenes = PackedStringArray("res://equipment/Primary/Rifle/space_rifle_test.tscn", "res://equipment/secondary/Rock/rock.tscn", "res://equipment/Primary/Rifle/space_rifle_test.tscn", "res://equipment/gear/Shield/shield.tscn", "res://equipment/gear/Cover/cover.tscn")
 spawn_path = NodePath("..")
 
 [node name="MeshInstance3D" type="Node" parent="."]

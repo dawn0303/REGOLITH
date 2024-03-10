@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://1rqv2vq4h1m7"]
 
-[ext_resource type="Script" path="res://shield.gd" id="1_wjcok"]
+[ext_resource type="Script" path="res://equipment/gear/Shield/shield.gd" id="1_6uiui"]
 [ext_resource type="Texture2D" uid="uid://cbob5l687mq4k" path="res://shield_shield texture.png" id="2_6hi0j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yibts"]
@@ -51,7 +51,7 @@ transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -1.1, 
 collision_layer = 4
 collision_mask = 7
 freeze = true
-script = ExtResource("1_wjcok")
+script = ExtResource("1_6uiui")
 
 [node name="Shield_002" type="MeshInstance3D" parent="."]
 transform = Transform3D(4.3, 0, 5.68434e-14, 0, 4.3, 0, -5.68434e-14, 0, 4.3, 0.0493443, 6.50388, 2.35146)

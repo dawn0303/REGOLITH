@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bvcddvs1k2s5y"
+path="res://.godot/imported/DepotMinistatic.obj-bf8590b29a6bcba46aab31a122487d32.mesh"
+
+[deps]
+
+files=["res://.godot/imported/DepotMinistatic.obj-bf8590b29a6bcba46aab31a122487d32.mesh"]
+
+source_file="res://maps/depot/DepotMinistatic.obj"
+dest_files=["res://.godot/imported/DepotMinistatic.obj-bf8590b29a6bcba46aab31a122487d32.mesh", "res://.godot/imported/DepotMinistatic.obj-bf8590b29a6bcba46aab31a122487d32.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

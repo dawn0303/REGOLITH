@@ -12,7 +12,7 @@ func _ready():
 		if player == null:
 			player = $"../../../.."
 		team = player.team
-		if  get_parent().get_name() == "weapon parent" and col.disabled:# and !player.is_multiplayer_authority():
+		if  true:#get_parent().get_name() == "weapon parent":# and col.disabled:# and !player.is_multiplayer_authority():
 			col.disabled = false
 			col2.disabled = false
 

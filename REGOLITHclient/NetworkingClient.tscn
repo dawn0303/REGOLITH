@@ -24,7 +24,7 @@ properties/4/replication_mode = 2
 script = ExtResource("1_rlsr6")
 
 [node name="Node3D" parent="." instance=ExtResource("2_uskch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3777, 0, 4.9424)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.378, 0, 4.942)
 
 [node name="Lobby" type="CanvasLayer" parent="."]
 
@@ -100,7 +100,7 @@ popup/item_1/text = "cover"
 popup/item_1/id = 1
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://player.tscn", "res://cover.tscn", "res://rock.tscn")
+_spawnable_scenes = PackedStringArray("res://player.tscn", "res://equipment/gear/Cover/cover.tscn", "res://equipment/secondary/Rock/rock.tscn")
 spawn_path = NodePath("..")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

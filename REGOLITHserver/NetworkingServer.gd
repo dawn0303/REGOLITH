@@ -60,7 +60,7 @@ func remove_player(leaving_peer_id : int) -> void:
 
 
 @rpc
-func sync_player_list(updated_connected_peer_ids):
+func sync_player_list(_updated_connected_peer_ids):
 	pass # only implemented in client (but still has to exist here)
 	
 
@@ -81,8 +81,8 @@ func sync_player_list(updated_connected_peer_ids):
 
 
 @rpc("any_peer", "call_local", "reliable")
-func spawnTest(name, pos, rot, scl):
-	var object = load(name).instantiate()
+func spawnTest(nme, pos, rot, scl):
+	var object = load(nme).instantiate()
 	add_child(object, true)
 	object.global_position = pos
 	print(pos)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://nqdpx6bt8mmy"]
 
-[ext_resource type="Script" path="res://cover.gd" id="1_hxa7c"]
+[ext_resource type="Script" path="res://equipment/gear/Cover/cover.gd" id="1_o5krm"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_766ur"]
 properties/0/path = NodePath(".:position")
@@ -14,7 +14,13 @@ properties/2/spawn = true
 properties/2/replication_mode = 1
 
 [node name="Cover" type="Node3D"]
-script = ExtResource("1_hxa7c")
+script = ExtResource("1_o5krm")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_766ur")
+
+[node name="staticCheck" type="Node" parent="."]
+
+[node name="Area3D" type="Node" parent="."]
+
+[node name="Ghost2" type="Node" parent="Area3D"]
