@@ -38,13 +38,13 @@ func _unhandled_input(_event):
 	if not equipped: return
 	if not player.is_multiplayer_authority(): return
 	if player.gearCount == 0: return
-	if Input.is_action_pressed("shoot") and raycast.is_colliding() and player.gearCount > 0 and !area.has_overlapping_bodies() and not staticCheck.is_colliding():
+	if Input.is_action_pressed("shoot") and raycast.is_colliding() and player.gearCount > 0 and !area.has_overlapping_bodies():# and not staticCheck.is_colliding():
 		place.rpc()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 
 func _process(_delta):
 	if not equipped: return
-	if raycast.is_colliding() and not staticCheck.is_colliding():
+	if raycast.is_colliding():# and not staticCheck.is_colliding():
 		area.global_position = raycast.get_collision_point()
 		area.global_rotation = raycast.get_collision_normal()
 		area.global_rotation.y = player.global_rotation.y + PI

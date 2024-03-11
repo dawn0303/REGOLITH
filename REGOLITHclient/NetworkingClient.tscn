@@ -24,7 +24,7 @@ properties/4/replication_mode = 2
 script = ExtResource("1_rlsr6")
 
 [node name="Node3D" parent="." instance=ExtResource("2_uskch")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.378, 0, 4.942)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.541, 0, -6.909)
 
 [node name="Lobby" type="CanvasLayer" parent="."]
 
