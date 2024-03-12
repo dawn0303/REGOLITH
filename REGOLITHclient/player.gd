@@ -79,7 +79,7 @@ const THRUST = 1.0
 const JUMP_VELOCITY = 2
 const maxboost = 1000
 var boost = 1000
-
+var dashTimer = 0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -211,19 +211,31 @@ func _physics_process(delta):
 		boost -= 2
 		
 		boost_bar.value = boost
-		#boost_changed.emit(boost)
-	elif is_on_floor():
+	elif is_on_floor() and dashTimer == 0:
 		velocity.x = move_toward(velocity.x, 0, 0.5)
 		velocity.z = move_toward(velocity.z, 0, 0.5)
+	if dashTimer > 0:
+		dashTimer -=1
+	if Input.is_action_pressed("boost") and is_on_floor() and dashTimer == 0 and boost > 0:
+		velocity = 10*direction
+		boost -= 100
+		dashTimer = 5
+		boost_bar.value = boost
+	
+
+	
 	if boost > 0 and Input.is_action_pressed("boost") and not is_on_floor():
 		velocity.y += THRUST/60
 		boost -=1
 		boost_bar.value = boost
-		#boost_changed.emit(boost)
-	if not Input.is_action_pressed("boost") and boost < 1000:
-		boost += 0.3
+	if boost > 0 and Input.is_action_pressed("crouch") and not is_on_floor():
+		velocity.y -= THRUST/10
+		boost -=1
 		boost_bar.value = boost
-		#boost_changed.emit(boost)
+	
+	if not Input.is_action_pressed("boost") and boost < 1000:
+		boost += 0.5
+		boost_bar.value = boost
 	#localVel3 =  Vector3(input_dir.x, 0, input_dir.y)
 	localVel3.x = move_toward(localVel3.x, input_dir.x, 0.2/SPEED)
 	localVel3.z = move_toward(localVel3.z, input_dir.y, 0.2/SPEED)
@@ -259,7 +271,6 @@ func _physics_process(delta):
 		suitLeak()
 	
 	#AnimTree.set("parameters/BlendSpace2D/blend_position", Vector2(velocity.z/SPEED, velocity.x/SPEED) )
-	
 
 
 
