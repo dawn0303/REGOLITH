@@ -88,6 +88,11 @@ func _physics_process(delta):
 	if shooting and shotCooldown == 0 and player.mag1 > 0:
 		player.mag1 -= 1
 		mag_counter.text = str(player.mag1)
+		#player.velocity += Vector3(0, 1, 0)
+		#var a = player.get_transform().basis
+		#var b = cam_parent.get_transform().basis
+		player.velocity += (Vector3(-player.get_transform().basis.x.z, -cam_parent.get_transform().basis.y.z, player.get_transform().basis.z.z) * 0.2)
+		
 		shotCooldown = shotDelay
 		play_shoot_effects.rpc()
 		if raycast.is_colliding():
