@@ -74,7 +74,7 @@ var def_weapon_parent_pos
 var mouse_input : Vector2
 const sway_amount = 0.004
 const tilt_amount = 0.05
-const SPEED = 3
+const SPEED = 3.5
 const THRUST = 1.0
 const JUMP_VELOCITY = 3
 const maxboost = 1000
@@ -220,7 +220,7 @@ func _physics_process(delta):
 	if dashTimer > 0:
 		dashTimer -=1
 	
-	if Input.is_action_pressed("boost") and is_on_floor() and dashTimer == 0 and boost > dashCost and dashReady:
+	if Input.is_action_pressed("boost") and is_on_floor() and dashTimer == 0 and boost > dashCost and dashReady and input_dir.length() != 0:
 		velocity = dashMult*direction
 		boost -= dashCost
 		dashTimer = 5
