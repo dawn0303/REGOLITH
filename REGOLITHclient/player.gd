@@ -80,6 +80,7 @@ const JUMP_VELOCITY = 2
 const maxboost = 1000
 var boost = 1000
 var dashTimer = 0
+var dashReady = true
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
@@ -216,12 +217,15 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, 0.5)
 	if dashTimer > 0:
 		dashTimer -=1
+	
 	if Input.is_action_pressed("boost") and is_on_floor() and dashTimer == 0 and boost > 0:
 		velocity = 10*direction
 		boost -= 100
 		dashTimer = 5
 		boost_bar.value = boost
-	
+		dashReady = false
+	if Input.is_action_just_released("boost"):
+		dashReady = true
 
 	
 	if boost > 0 and Input.is_action_pressed("boost") and not is_on_floor():
